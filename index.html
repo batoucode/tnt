@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TNT Tours Nord Touraine - Basket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Éléments de décoration ballon de basket -->
+    <div class="basketball-elements">
+        <div class="basketball" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+        <div class="basketball" style="top: 20%; right: 10%; animation-delay: -5s;"></div>
+        <div class="basketball" style="bottom: 30%; left: 15%; animation-delay: -10s;"></div>
+        <div class="basketball" style="bottom: 10%; right: 20%; animation-delay: -15s;"></div>
+        <div class="basketball" style="top: 40%; left: 80%; animation-delay: -7s;"></div>
+        <div class="basketball" style="top: 60%; left: 10%; animation-delay: -12s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-img">
+                    <img src="https://static.wixstatic.com/media/613e2c_49bfb0765aa44b0b8211af156607e247~mv2.png"
+                        alt="Logo TNT Tours Nord Touraine">
+                </div>
+                <div class="logo-text">
+                    <h1>TNT TOURS NORD TOURAINE</h1>
+                    <p>CLUB DE BASKET • DEPUIS 2015</p>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#accueil" class="active">Accueil</a></li>
+                    <li><a href="#scores">Scores</a></li>
+                    <li><a href="#galerie">Galerie</a></li>
+                    <li><a href="#equipes">Équipes</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Hero -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h2><span>L'ÉQUIPE</span> TNT TOURS NORD TOURAINE</h2>
+                <p>Rejoignez la famille TNT ! Passion, performance et esprit d'équipe sont nos valeurs fondamentales.
+                    Suivez nos matchs, nos résultats et vivez l'expérience basket avec nous.</p>
+                <a href="#equipes" class="cta-button">
+                    <i class="fas fa-basketball-ball"></i> Découvrir nos équipes
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Scores -->
+    <section class="scores-section" id="scores">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Résultats récents</h2>
+            </div>
+
+            <div class="scores-container" id="scoresContainer">
+                <!-- Les scores seront ajoutés dynamiquement par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Galerie -->
+    <section class="gallery-section" id="galerie">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Galerie photos</h2>
+            </div>
+
+            <div class="gallery-container" id="galleryContainer">
+                <!-- Les images seront ajoutées dynamiquement par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Équipes -->
+    <section class="teams-section" id="equipes">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Nos équipes</h2>
+            </div>
+
+            <div class="teams-container" id="teamsContainer">
+                <!-- Les équipes seront ajoutées dynamiquement par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-img">
+                            <img src="https://static.wixstatic.com/media/613e2c_49bfb0765aa44b0b8211af156607e247~mv2.png"
+                                alt="Logo TNT Tours Nord Touraine">
+                        </div>
+                    </div>
+                    <p>Le club de basket TNT Tours Nord Touraine promeut les valeurs du sport, du dépassement de soi et
+                        de l'esprit d'équipe depuis 2015.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Nos équipes</h3>
+                    <ul>
+                        <li><a href="#equipes">U13 M1</a></li>
+                        <li><a href="#equipes">Senior</a></li>
+                        <li><a href="#equipes">U15 F1</a></li>
+                        <li><a href="#equipes">U18 M2</a></li>
+                        <li><a href="#equipes">U11 Découverte</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
+                        <li><a href="#scores"><i class="fas fa-chart-line"></i> Scores</a></li>
+                        <li><a href="#galerie"><i class="fas fa-images"></i> Galerie</a></li>
+                        <li><a href="#equipes"><i class="fas fa-users"></i> Équipes</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Rue du Basket, 37000 Tours</li>
+                        <li><i class="fas fa-phone"></i> 02 47 12 34 56</li>
+                        <li><i class="fas fa-envelope"></i> contact@tnt-tours-basket.fr</li>
+                        <li><i class="fas fa-clock"></i> Bureau: Lundi-Vendredi 9h-18h</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 TNT Tours Nord Touraine. Tous droits réservés. | Site conçu avec passion pour le basket
+                </p>
+                <div id="version-display" style="margin-top: 10px; font-size: 0.8rem; color: var(--text-gray);"></div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

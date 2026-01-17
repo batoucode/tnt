@@ -8,11 +8,11 @@ const matchScores = [
 
 // Données pour les équipes
 const teams = [
-    { 
-        id: 1, 
-        name: "U13 M1", 
-        category: "U13 MASCULIN 1", 
-        coach: "Marc Dupont", 
+    {
+        id: 1,
+        name: "U13 M1",
+        category: "U13 MASCULIN 1",
+        coach: "Marc Dupont",
         training: "Lun 17h-19h, Jeu 18h-20h",
         nextMatch: "22/10/2023 vs Blois",
         players: [
@@ -23,11 +23,11 @@ const teams = [
             { name: "Mathis Moreau", number: 14, position: "Ailier fort" }
         ]
     },
-    { 
-        id: 2, 
-        name: "Senior", 
-        category: "SENIOR MASCULIN", 
-        coach: "Jean Lefèvre", 
+    {
+        id: 2,
+        name: "Senior",
+        category: "SENIOR MASCULIN",
+        coach: "Jean Lefèvre",
         training: "Mar 20h-22h, Ven 19h-21h",
         nextMatch: "21/10/2023 vs Orléans",
         players: [
@@ -38,11 +38,11 @@ const teams = [
             { name: "David Perrin", number: 10, position: "Ailier fort" }
         ]
     },
-    { 
-        id: 3, 
-        name: "U15 F1", 
-        category: "U15 FÉMININ 1", 
-        coach: "Sophie Lambert", 
+    {
+        id: 3,
+        name: "U15 F1",
+        category: "U15 FÉMININ 1",
+        coach: "Sophie Lambert",
         training: "Mer 16h-18h, Sam 10h-12h",
         nextMatch: "20/10/2023 vs Chinon",
         players: [
@@ -70,38 +70,67 @@ let currentScores = [...matchScores];
 let currentGallery = [...galleryImages];
 
 // Initialisation
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialisation des menus
     initNavigation();
-    
+
     // Chargement des scores
     renderScores();
-    
+
     // Chargement de la galerie
     renderGallery();
-    
+
     // Chargement des équipes
     renderTeams();
-    
+
     // Animation au scroll
     initScrollAnimations();
-    
+
     // Header qui change au scroll
     initHeaderScroll();
-    
+
     // Ajout de l'élément pour ajouter des photos
     addPhotoUploadElement();
+
+    // Initialisation du thème
+    initThemeSwitch();
 
     // Affichage de la version
     displayVersion();
 });
 
+// Thème Clair/Sombre
+function initThemeSwitch() {
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+        document.body.classList.add(currentTheme);
+
+        if (currentTheme === 'light-theme') {
+            toggleSwitch.checked = true;
+        }
+    }
+
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.body.classList.add('light-theme');
+            localStorage.setItem('theme', 'light-theme');
+        } else {
+            document.body.classList.remove('light-theme');
+            localStorage.setItem('theme', 'dark-theme');
+        }
+    }
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+}
+
 // Navigation
 function initNavigation() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navMenu = document.getElementById('navMenu');
-    
-    mobileMenuBtn.addEventListener('click', function() {
+
+    mobileMenuBtn.addEventListener('click', function () {
         navMenu.classList.toggle('active');
         const icon = mobileMenuBtn.querySelector('i');
         if (navMenu.classList.contains('active')) {
@@ -112,29 +141,29 @@ function initNavigation() {
             icon.classList.add('fa-bars');
         }
     });
-    
+
     // Fermer le menu mobile au clic sur un lien
     const navLinks = document.querySelectorAll('nav a');
     navLinks.forEach(link => {
-        link.addEventListener('click', function() {
+        link.addEventListener('click', function () {
             navMenu.classList.remove('active');
             mobileMenuBtn.querySelector('i').classList.remove('fa-times');
             mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-            
+
             // Mettre à jour l'état actif
             navLinks.forEach(l => l.classList.remove('active'));
             this.classList.add('active');
         });
     });
-    
+
     // Gestion du défilement fluide
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 window.scrollTo({
@@ -150,10 +179,10 @@ function initNavigation() {
 function initHeaderScroll() {
     const header = document.querySelector('header');
     let lastScroll = 0;
-    
-    window.addEventListener('scroll', function() {
+
+    window.addEventListener('scroll', function () {
         const currentScroll = window.pageYOffset;
-        
+
         if (currentScroll > 100) {
             header.style.padding = '12px 0';
             header.style.backgroundColor = 'rgba(13, 13, 13, 0.98)';
@@ -163,7 +192,7 @@ function initHeaderScroll() {
             header.style.backgroundColor = 'rgba(13, 13, 13, 0.95)';
             header.style.boxShadow = 'none';
         }
-        
+
         lastScroll = currentScroll;
     });
 }
@@ -171,18 +200,18 @@ function initHeaderScroll() {
 // Animation au scroll
 function initScrollAnimations() {
     const fadeElements = document.querySelectorAll('.fade-in');
-    
-    const fadeInOnScroll = function() {
+
+    const fadeInOnScroll = function () {
         fadeElements.forEach(element => {
             const elementTop = element.getBoundingClientRect().top;
             const elementVisible = 150;
-            
+
             if (elementTop < window.innerHeight - elementVisible) {
                 element.classList.add('visible');
             }
         });
     };
-    
+
     window.addEventListener('scroll', fadeInOnScroll);
     fadeInOnScroll(); // Appel initial
 }
@@ -191,14 +220,14 @@ function initScrollAnimations() {
 function renderScores() {
     const scoresContainer = document.getElementById('scoresContainer');
     scoresContainer.innerHTML = '';
-    
+
     currentScores.forEach(match => {
         const scoreCard = document.createElement('div');
         scoreCard.className = 'score-card fade-in';
-        
+
         // Déterminer le gagnant pour le style
         const winner = match.score1 > match.score2 ? 'team1' : 'team2';
-        
+
         scoreCard.innerHTML = `
             <div class="teams">
                 <div class="team">
@@ -221,7 +250,7 @@ function renderScores() {
                 <p><strong>Date:</strong> ${match.date}</p>
             </div>
         `;
-        
+
         scoresContainer.appendChild(scoreCard);
     });
 }
@@ -230,22 +259,22 @@ function renderScores() {
 function renderGallery() {
     const galleryContainer = document.getElementById('galleryContainer');
     galleryContainer.innerHTML = '';
-    
+
     currentGallery.forEach(image => {
         const galleryItem = document.createElement('div');
         galleryItem.className = 'gallery-item fade-in';
-        
+
         galleryItem.innerHTML = `
             <img src="${image.url}" alt="${image.title}" loading="lazy">
             <div class="gallery-item-overlay">
                 <p>${image.title}</p>
             </div>
         `;
-        
-        galleryItem.addEventListener('click', function() {
+
+        galleryItem.addEventListener('click', function () {
             openLightbox(image);
         });
-        
+
         galleryContainer.appendChild(galleryItem);
     });
 }
@@ -253,18 +282,18 @@ function renderGallery() {
 // Ajouter l'élément pour uploader des photos
 function addPhotoUploadElement() {
     const galleryContainer = document.getElementById('galleryContainer');
-    
+
     const addPhotoElement = document.createElement('div');
     addPhotoElement.className = 'add-photo-btn fade-in';
     addPhotoElement.innerHTML = `
         <i class="fas fa-plus-circle"></i>
         <p>Ajouter une photo</p>
     `;
-    
-    addPhotoElement.addEventListener('click', function() {
+
+    addPhotoElement.addEventListener('click', function () {
         addNewPhoto();
     });
-    
+
     galleryContainer.appendChild(addPhotoElement);
 }
 
@@ -272,11 +301,11 @@ function addPhotoUploadElement() {
 function renderTeams() {
     const teamsContainer = document.getElementById('teamsContainer');
     teamsContainer.innerHTML = '';
-    
+
     teams.forEach(team => {
         const teamCard = document.createElement('div');
         teamCard.className = 'team-card fade-in';
-        
+
         let playersListHTML = '';
         team.players.forEach(player => {
             playersListHTML += `
@@ -286,7 +315,7 @@ function renderTeams() {
                 </li>
             `;
         });
-        
+
         teamCard.innerHTML = `
             <div class="team-card-header">
                 <h3>${team.category}</h3>
@@ -312,7 +341,7 @@ function renderTeams() {
                 </ul>
             </div>
         `;
-        
+
         teamsContainer.appendChild(teamCard);
     });
 }
@@ -327,18 +356,18 @@ function addNewPhoto() {
         "Préparation physique",
         "Rencontre avec les supporters"
     ];
-    
+
     const randomTitle = photoTitles[Math.floor(Math.random() * photoTitles.length)];
     const newPhoto = {
         id: newId,
         url: `https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=${newId}`,
         title: `${randomTitle} #${newId}`
     };
-    
+
     currentGallery.push(newPhoto);
     renderGallery();
     addPhotoUploadElement();
-    
+
     // Animation de notification
     showNotification(`Photo "${randomTitle}" ajoutée avec succès !`);
 }
@@ -360,7 +389,7 @@ function openLightbox(image) {
     lightbox.style.flexDirection = 'column';
     lightbox.style.opacity = '0';
     lightbox.style.transition = 'opacity 0.3s ease';
-    
+
     lightbox.innerHTML = `
         <img src="${image.url}" alt="${image.title}" style="max-width: 90%; max-height: 70%; border-radius: 10px; box-shadow: 0 0 30px rgba(255, 107, 0, 0.3);">
         <h3 style="margin-top: 20px; color: var(--accent-orange); font-size: 1.8rem; text-align: center;">${image.title}</h3>
@@ -368,14 +397,14 @@ function openLightbox(image) {
             <i class="fas fa-times"></i>
         </button>
     `;
-    
+
     document.body.appendChild(lightbox);
-    
+
     // Animation d'entrée
     setTimeout(() => {
         lightbox.style.opacity = '1';
     }, 10);
-    
+
     // Fermer la lightbox
     const closeBtn = lightbox.querySelector('button');
     closeBtn.addEventListener('click', () => {
@@ -384,7 +413,7 @@ function openLightbox(image) {
             document.body.removeChild(lightbox);
         }, 300);
     });
-    
+
     // Fermer en cliquant à l'extérieur
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) {
@@ -413,15 +442,15 @@ function showNotification(message) {
     notification.style.opacity = '0';
     notification.style.transition = 'all 0.4s ease';
     notification.textContent = message;
-    
+
     document.body.appendChild(notification);
-    
+
     // Animation d'entrée
     setTimeout(() => {
         notification.style.transform = 'translateY(0)';
         notification.style.opacity = '1';
     }, 10);
-    
+
     // Supprimer après 3 secondes
     setTimeout(() => {
         notification.style.transform = 'translateY(100px)';
@@ -439,7 +468,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.17.21.47";
+        const version = "v2026.01.17.21.57";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

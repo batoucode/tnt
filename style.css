@@ -883,35 +883,61 @@ input:checked+.slider:before {
 
     nav ul {
         position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100vh;
-        background: rgba(13, 13, 13, 0.98);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -45%) scale(0.95);
+        width: 85%;
+        max-width: 400px;
+        height: auto;
+        min-height: 300px;
+        background: rgba(20, 20, 20, 0.95);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 20px;
-        gap: 0;
-        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
-        transform: translateX(100%);
+        padding: 40px 20px;
+        gap: 10px;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 107, 0, 0.3);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         opacity: 0;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         z-index: 10000;
         backdrop-filter: blur(20px);
         display: none;
     }
 
+    /* Overlay for popup background */
+    nav ul::before {
+        content: '';
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
     nav ul.active {
         display: flex !important;
-        transform: translateX(0);
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    nav ul.active::before {
         opacity: 1;
     }
 
     nav ul li {
         width: 100%;
         text-align: center;
-        padding: 15px 0;
+        padding: 10px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 

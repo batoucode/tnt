@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Équipes - TNT Tours Nord Touraine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none;">
+                    <div class="logo-img">
+                        <img src="img/logo TNT sans fond.png" alt="Logo TNT Tours Nord Touraine">
+                    </div>
+                    <div class="logo-text">
+                        <h1 style="margin:0;">TNT TOURS NORD TOURAINE</h1>
+                        <p style="margin:0; color:#F0F0F0; font-size:13px;">COOPÉRATION TERRITORIALE DE CLUBS</p>
+                    </div>
+                </a>
+            </div>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="club.html">Le Club</a></li>
+                    <li><a href="scores.html">Scores</a></li>
+                    <li><a href="galerie.html">Galerie</a></li>
+                    <li><a href="equipes.html" class="active">Équipes</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="padding: 150px 0 60px; min-height: auto;">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h2>NOS <span>ÉQUIPES</span></h2>
+                <p>Découvrez les talents qui composent la Team Nord Touraine.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="teams-section" id="equipes" style="padding: 80px 0;">
+        <div class="container">
+            <div class="teams-container" id="teamsContainer">
+                <!-- Les équipes seront ajoutées dynamiquement par JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <div class="logo-img">
+                            <img src="img/logo TNT sans fond.png" alt="Logo TNT Tours Nord Touraine">
+                        </div>
+                    </div>
+                    <p>La Team Nord Touraine regroupe 8 catégories d'équipes masculines et féminines.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Nos équipes</h3>
+                    <ul>
+                        <li>Séniors M</li>
+                        <li>U18 F</li>
+                        <li>U15 M / F1 / F2</li>
+                        <li>U13 M1 / M2 / F</li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Navigation</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="club.html">Le Club</a></li>
+                        <li><a href="scores.html">Scores</a></li>
+                        <li><a href="galerie.html">Galerie</a></li>
+                        <li><a href="equipes.html">Équipes</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="theme-switch-wrapper">
+                <span>Darc</span>
+                <label class="theme-switch" for="checkbox">
+                    <input type="checkbox" id="checkbox" />
+                    <div class="slider"></div>
+                </label>
+                <span>Light</span>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 TNT Tours Nord Touraine.</p>
+                <div id="version-display" style="margin-top: 10px; font-size: 0.8rem; color: var(--text-secondary);">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

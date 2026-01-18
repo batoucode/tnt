@@ -215,6 +215,8 @@ function initNavigation() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navMenu = document.getElementById('navMenu');
 
+    if (!mobileMenuBtn || !navMenu) return;
+
     mobileMenuBtn.addEventListener('click', function (e) {
         e.stopPropagation();
         navMenu.classList.toggle('active');
@@ -232,8 +234,10 @@ function initNavigation() {
     document.addEventListener('click', function (e) {
         if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
             navMenu.classList.remove('active');
-            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            if (mobileMenuBtn.querySelector('i')) {
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            }
         }
     });
 
@@ -242,25 +246,36 @@ function initNavigation() {
     navLinks.forEach(link => {
         link.addEventListener('click', function () {
             navMenu.classList.remove('active');
-            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-
-            // Mettre à jour l'état actif
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
+            if (mobileMenuBtn.querySelector('i')) {
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+            }
         });
     });
 
-    // Gestion du défilement fluide
+    // Gestion de l'état actif des liens selon l'URL (Multi-page)
+    const currentPath = window.location.pathname;
+    const navLinksList = document.querySelectorAll('nav a');
+    navLinksList.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && href !== '#' && href !== 'index.html' && currentPath.includes(href)) {
+            link.classList.add('active');
+        } else if ((currentPath.endsWith('/') || currentPath.endsWith('index.html')) && (href === 'index.html' || href === '#accueil')) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
+
+    // Gestion du défilement fluide (pour les ancres internes)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
 
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
+                e.preventDefault();
                 window.scrollTo({
                     top: targetElement.offsetTop - 100,
                     behavior: 'smooth'
@@ -314,9 +329,15 @@ function initScrollAnimations() {
 // Afficher les scores
 function renderScores() {
     const scoresContainer = document.getElementById('scoresContainer');
+    if (!scoresContainer) return;
+
     scoresContainer.innerHTML = '';
 
-    currentScores.forEach(match => {
+    // Si on est sur la page d'accueil, on ne montre que les 2 derniers scores
+    const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || !window.location.pathname.includes('.html');
+    const scoresToShow = isHomePage ? currentScores.slice(0, 2) : currentScores;
+
+    scoresToShow.forEach(match => {
         const scoreCard = document.createElement('div');
         scoreCard.className = 'score-card fade-in';
 
@@ -353,6 +374,8 @@ function renderScores() {
 // Afficher la galerie
 function renderGallery() {
     const galleryContainer = document.getElementById('galleryContainer');
+    if (!galleryContainer) return;
+
     galleryContainer.innerHTML = '';
 
     currentGallery.forEach(image => {
@@ -395,6 +418,8 @@ function addPhotoUploadElement() {
 // Afficher les équipes
 function renderTeams() {
     const teamsContainer = document.getElementById('teamsContainer');
+    if (!teamsContainer) return;
+
     teamsContainer.innerHTML = '';
 
     teams.forEach(team => {
@@ -563,7 +588,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.18.16.20";
+        const version = "v2026.01.18.16.25";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

@@ -156,6 +156,9 @@ let currentGallery = [...galleryImages];
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', function () {
+    // Initialisation du thème
+    initThemeSwitch();
+
     // Initialisation des menus
     initNavigation();
 
@@ -177,9 +180,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Ajout de l'élément pour ajouter des photos
     addPhotoUploadElement();
 
-    // Initialisation du thème
-    initThemeSwitch();
-
     // Affichage de la version
     displayVersion();
 });
@@ -187,14 +187,13 @@ document.addEventListener('DOMContentLoaded', function () {
 // Thème Clair/Sombre
 function initThemeSwitch() {
     const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    if (!toggleSwitch) return;
+
     const currentTheme = localStorage.getItem('theme');
 
-    if (currentTheme) {
-        document.body.classList.add(currentTheme);
-
-        if (currentTheme === 'light-theme') {
-            toggleSwitch.checked = true;
-        }
+    if (currentTheme === 'light-theme') {
+        document.body.classList.add('light-theme');
+        toggleSwitch.checked = true;
     }
 
     function switchTheme(e) {
@@ -589,7 +588,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.18.16.32";
+        const version = "v2026.01.18.16.36";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

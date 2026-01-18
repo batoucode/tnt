@@ -130,7 +130,8 @@ function initNavigation() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navMenu = document.getElementById('navMenu');
 
-    mobileMenuBtn.addEventListener('click', function () {
+    mobileMenuBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
         navMenu.classList.toggle('active');
         const icon = mobileMenuBtn.querySelector('i');
         if (navMenu.classList.contains('active')) {
@@ -139,6 +140,15 @@ function initNavigation() {
         } else {
             icon.classList.remove('fa-times');
             icon.classList.add('fa-bars');
+        }
+    });
+
+    // Fermer le menu au clic à l'extérieur
+    document.addEventListener('click', function (e) {
+        if (!navMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+            navMenu.classList.remove('active');
+            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
         }
     });
 
@@ -468,7 +478,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.18.14.12";
+        const version = "v2026.01.18.14.20";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -52,8 +52,7 @@
                 <span class="badge">Saison 2023-2024</span>
                 <h2>LA PASSION DU <span>BASKET</span> EN NORD TOURAINE</h2>
                 <p>La Team Nord Touraine (TNT) est une Coopération Territoriale de Clubs (CTC) regroupant le Monnaie
-                    Basket Club et l'AB Château-Renault. Un projet ambitieux pour faire rayonner le basket-ball sur
-                    notre
+                    Basket Club et l'AB Ch�teau-Renault. Un projet ambitieux pour faire rayonner le basket-ball sur notre
                     territoire.</p>
 
                 <div class="hero-btns">
@@ -69,13 +68,8 @@
                         <span class="stat-label">Équipes engagées</span>
                     </div>
                     <div class="stat-item">
-                        <div class="partner-logos"
-                            style="display: flex; gap: 15px; margin-bottom: 10px; justify-content: center; align-items: center;">
-                            <img src="img/logo monnaie basket club.gif" alt="Monnaie Basket Club"
-                                style="height: 50px; border-radius: 8px; background: white; padding: 2px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                            <img src="img/crab logo.png" alt="Château-Renault" title="Le Crabe - Château-Renault"
-                                style="height: 50px; border-radius: 8px; background: white; padding: 2px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-                        </div>
+                        <i class="fas fa-shield-alt"
+                            style="color: var(--accent-orange); font-size: 1.5rem; margin-bottom: 10px;"></i>
                         <span class="stat-number">2</span>
                         <span class="stat-label">Clubs partenaires</span>
                     </div>
@@ -100,8 +94,8 @@
                     <i class="fas fa-users"
                         style="font-size: 3rem; color: var(--accent-orange); margin-bottom: 20px;"></i>
                     <h3>L'Esprit TNT</h3>
-                    <p style="margin-bottom: 20px;">DÃ©couvrez l'histoire de notre union et les valeurs que nous portons
-                        fiÃ¨rement sur le terrain.</p>
+                    <p style="margin-bottom: 20px;">Découvrez l'histoire de notre union et les valeurs que nous portons
+                        fièrement sur le terrain.</p>
                     <a href="club.html"
                         style="color: var(--accent-orange); font-weight: 700; text-decoration: none;">Lire l'histoire <i
                             class="fas fa-arrow-right"></i></a>
@@ -112,7 +106,7 @@
                     class="fade-in">
                     <i class="fas fa-trophy"
                         style="font-size: 3rem; color: var(--accent-orange); margin-bottom: 20px;"></i>
-                    <h3>Derniers RÃ©sultats</h3>
+                    <h3>Derniers Résultats</h3>
                     <div id="scoresContainer" style="margin-bottom: 20px;">
                         <!-- Les 2 derniers scores s'afficheront ici -->
                     </div>
@@ -127,7 +121,7 @@
                     <i class="fas fa-camera"
                         style="font-size: 3rem; color: var(--accent-orange); margin-bottom: 20px;"></i>
                     <h3>La Galerie</h3>
-                    <p style="margin-bottom: 20px;">Plongez dans l'ambiance de nos matchs et entraÃ®nements Ã  travers
+                    <p style="margin-bottom: 20px;">Plongez dans l'ambiance de nos matchs et entraînements à travers
                         notre galerie photos.</p>
                     <a href="galerie.html"
                         style="color: var(--accent-orange); font-weight: 700; text-decoration: none;">Ouvrir la galerie
@@ -147,7 +141,7 @@
                             <img src="img/logo TNT sans fond.png" alt="Logo TNT Tours Nord Touraine">
                         </div>
                     </div>
-                    <p>La Team Nord Touraine (TNT) regroupe le Monnaie Basket Club et l'AB Château-Renault. Une union
+                    <p>La Team Nord Touraine (TNT) regroupe le Monnaie Basket Club et l'AB Ch�teau-Renault. Une union
                         forte pour un basket compétitif et formateur.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>

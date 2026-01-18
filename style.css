@@ -101,6 +101,8 @@ header {
     overflow: hidden;
     padding: 5px;
     background-color: white;
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
 }
 
 .logo-img img {
@@ -371,6 +373,8 @@ nav a.active:after {
     font-weight: 800;
     font-size: 20px;
     border: 2px solid rgba(255, 107, 0, 0.3);
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
 }
 
 .team-name {
@@ -748,6 +752,8 @@ footer:before {
     color: var(--accent-orange);
     font-size: 1.2rem;
     transition: all 0.3s ease;
+    flex-shrink: 0;
+    aspect-ratio: 1 / 1;
 }
 
 .social-icons a:hover {

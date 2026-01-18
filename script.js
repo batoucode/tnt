@@ -10,48 +10,75 @@ const matchScores = [
 const teams = [
     {
         id: 1,
-        name: "U13 M1",
-        category: "U13 MASCULIN 1",
-        coach: "Marc Dupont",
-        training: "Lun 17h-19h, Jeu 18h-20h",
-        nextMatch: "22/10/2023 vs Blois",
-        players: [
-            { name: "Léo Martin", number: 7, position: "Meneur" },
-            { name: "Thomas Bernard", number: 12, position: "Ailier" },
-            { name: "Alexandre Petit", number: 5, position: "Pivot" },
-            { name: "Noah Leroy", number: 9, position: "Arrière" },
-            { name: "Mathis Moreau", number: 14, position: "Ailier fort" }
-        ]
+        name: "Séniors M",
+        category: "SÉNIOR MASCULIN",
+        coach: "En attente...",
+        training: "Consulter le planning",
+        nextMatch: "À venir",
+        players: []
     },
     {
         id: 2,
-        name: "Senior",
-        category: "SENIOR MASCULIN",
-        coach: "Jean Lefèvre",
-        training: "Mar 20h-22h, Ven 19h-21h",
-        nextMatch: "21/10/2023 vs Orléans",
-        players: [
-            { name: "Pierre Dubois", number: 4, position: "Meneur" },
-            { name: "Antoine Laurent", number: 8, position: "Arrière" },
-            { name: "Sébastien Girard", number: 15, position: "Pivot" },
-            { name: "Nicolas Renault", number: 6, position: "Ailier" },
-            { name: "David Perrin", number: 10, position: "Ailier fort" }
-        ]
+        name: "U13 F",
+        category: "U13 FÉMININ",
+        coach: "En attente...",
+        training: "Consulter le planning",
+        nextMatch: "À venir",
+        players: []
     },
     {
         id: 3,
+        name: "U13 M1",
+        category: "U13 MASCULIN 1",
+        coach: "En attente...",
+        training: "Consulter le planning",
+        nextMatch: "À venir",
+        players: []
+    },
+    {
+        id: 4,
+        name: "U13 M2",
+        category: "U13 MASCULIN 2",
+        coach: "En attente...",
+        training: "Consulter le planning",
+        nextMatch: "À venir",
+        players: []
+    },
+    {
+        id: 5,
+        name: "U15 M",
+        category: "U15 MASCULIN",
+        coach: "En attente...",
+        training: "Consulter le planning",
+        nextMatch: "À venir",
+        players: []
+    },
+    {
+        id: 6,
         name: "U15 F1",
         category: "U15 FÉMININ 1",
-        coach: "Sophie Lambert",
-        training: "Mer 16h-18h, Sam 10h-12h",
-        nextMatch: "20/10/2023 vs Chinon",
-        players: [
-            { name: "Emma Chevallier", number: 5, position: "Meneuse" },
-            { name: "Chloé Roux", number: 9, position: "Ailière" },
-            { name: "Manon Fournier", number: 12, position: "Pivot" },
-            { name: "Léa Da Silva", number: 7, position: "Arrière" },
-            { name: "Julie Garnier", number: 11, position: "Ailière forte" }
-        ]
+        coach: "En attente...",
+        training: "Consulter le planning",
+        nextMatch: "À venir",
+        players: []
+    },
+    {
+        id: 7,
+        name: "U15 F2",
+        category: "U15 FÉMININ 2",
+        coach: "En attente...",
+        training: "Consulter le planning",
+        nextMatch: "À venir",
+        players: []
+    },
+    {
+        id: 8,
+        name: "U18 F",
+        category: "U18 FÉMININ",
+        coach: "En attente...",
+        training: "Consulter le planning",
+        nextMatch: "À venir",
+        players: []
     }
 ];
 
@@ -478,7 +505,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.18.14.50";
+        const version = "v2026.01.18.14.58";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

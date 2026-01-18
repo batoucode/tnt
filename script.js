@@ -182,7 +182,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Affichage de la version
     displayVersion();
+
+    // Lightbox pour l'image de fusion
+    initFusionLightbox();
 });
+
+// Lightbox pour l'image de fusion
+function initFusionLightbox() {
+    const fusionImage = document.getElementById('fusionImage');
+    if (fusionImage) {
+        fusionImage.addEventListener('click', function () {
+            openLightbox({
+                url: 'img/fusion.jpg',
+                title: "L'Union Explosive - TNT"
+            });
+        });
+    }
+}
 
 // Thème Clair/Sombre
 function initThemeSwitch() {
@@ -588,7 +604,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.18.19.46";
+        const version = "v2026.01.18.20.35";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

@@ -390,6 +390,9 @@ nav a.active:after {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    flex: 1;
+    max-width: 250px;
 }
 
 .stat-number {
@@ -406,6 +409,7 @@ nav a.active:after {
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 5px;
+    text-align: center;
 }
 
 /* Light Theme Delimitation */

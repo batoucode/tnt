@@ -12,8 +12,8 @@ const teams = [
         id: 1,
         name: "Séniors M",
         category: "SÉNIOR MASCULIN",
-        coach: "En attente...",
-        training: "Consulter le planning",
+        coach: "À renseigner",
+        training: "Mer 19h30-21h00 (Monnaie), Ven 19h45-21h00 (Monnaie)",
         nextMatch: "À venir",
         players: []
     },
@@ -21,8 +21,8 @@ const teams = [
         id: 2,
         name: "U13 F",
         category: "U13 FÉMININ",
-        coach: "En attente...",
-        training: "Consulter le planning",
+        coach: "Christian WEINLING",
+        training: "Mer 13h30-15h00 (Monnaie), Mer 18h30-20h00 (Château-Renault)",
         nextMatch: "À venir",
         players: []
     },
@@ -30,44 +30,102 @@ const teams = [
         id: 3,
         name: "U13 M1",
         category: "U13 MASCULIN 1",
-        coach: "En attente...",
-        training: "Consulter le planning",
+        coach: "Clément CIAVALDINI-MARET, Nelson HUGUET",
+        training: "Lun 18h15-19h30 (Monnaie), Mer 15h30-16h30 (Château-Renault)",
         nextMatch: "À venir",
-        players: []
+        players: [
+            { name: "Cameron LECOUFFE", number: "", position: "" },
+            { name: "Noah LEJEUNE", number: "", position: "" },
+            { name: "Léo RIDET", number: "", position: "" },
+            { name: "Gaspard ROGER", number: "", position: "" },
+            { name: "Emilien SIBIRIL", number: "", position: "" },
+            { name: "Thomas CHAUVET", number: "", position: "" },
+            { name: "Gregory DESMARCHAIS", number: "", position: "" },
+            { name: "Hugo FAYARD", number: "", position: "" },
+            { name: "Louka FAYS", number: "", position: "" },
+            { name: "Sosthene GIRARD", number: "", position: "" },
+            { name: "Leon HUGUET", number: "", position: "" },
+            { name: "Antonin LADROUE", number: "", position: "" }
+        ]
     },
     {
         id: 4,
         name: "U13 M2",
         category: "U13 MASCULIN 2",
-        coach: "En attente...",
-        training: "Consulter le planning",
+        coach: "Jean-Marie ROBIN, Adodo HOMAWOO",
+        training: "Mar 18h30-20h00 (Château-Renault), Mer 15h00-16h30 (Monnaie)",
         nextMatch: "À venir",
-        players: []
+        players: [
+            { name: "Septime AGNUS", number: "", position: "" },
+            { name: "Maxence BARROIS VOYER", number: "", position: "" },
+            { name: "Grégory BOYER", number: "", position: "" },
+            { name: "Noah CAZANAVE", number: "", position: "" },
+            { name: "Joseph-kena DANTON", number: "", position: "" },
+            { name: "Charles DAVID", number: "", position: "" },
+            { name: "Nathan DELPUECH", number: "", position: "" },
+            { name: "Thiago FOUQUET", number: "", position: "" },
+            { name: "Noan HILI", number: "", position: "" },
+            { name: "Simon HULIN", number: "", position: "" },
+            { name: "Baptiste JUTTIN", number: "", position: "" },
+            { name: "Teddy LECOMTE", number: "", position: "" },
+            { name: "Noah LEJEUNE", number: "", position: "" },
+            { name: "Tom LENOIR HUVET", number: "", position: "" },
+            { name: "Warren SOBALAK", number: "", position: "" },
+            { name: "Clement TANVIRAY", number: "", position: "" }
+        ]
     },
     {
         id: 5,
         name: "U15 M",
         category: "U15 MASCULIN",
-        coach: "En attente...",
-        training: "Consulter le planning",
+        coach: "Matteo MAILLE, Mickael PESSARD",
+        training: "Mar 20h00-21h30 (Château-Renault), Jeu 18h30-20h00 (Château-Renault)",
         nextMatch: "À venir",
-        players: []
+        players: [
+            { name: "Charly BEGAULT", number: "", position: "" },
+            { name: "Alex BERON BREDIF", number: "", position: "" },
+            { name: "Hugo BESSAULT", number: "", position: "" },
+            { name: "Jules BOISBELET", number: "", position: "" },
+            { name: "Romain CHATAIGNIER", number: "", position: "" },
+            { name: "Louis CLEMENT", number: "", position: "" },
+            { name: "Elliot DIDDI", number: "", position: "" },
+            { name: "Gabin LEGRET", number: "", position: "" },
+            { name: "Enzo LOYAU", number: "", position: "" },
+            { name: "Alexandre LUWEZ", number: "", position: "" },
+            { name: "Aydan MILLET", number: "", position: "" },
+            { name: "Kurt PEAUGEOIS", number: "", position: "" },
+            { name: "Paul PESSARD", number: "", position: "" },
+            { name: "Mathis ROHELIER", number: "", position: "" },
+            { name: "Ethan SOBALAK", number: "", position: "" }
+        ]
     },
     {
         id: 6,
         name: "U15 F1",
         category: "U15 FÉMININ 1",
-        coach: "En attente...",
-        training: "Consulter le planning",
+        coach: "Mehdi BONNIN",
+        training: "Lun 18h45-20h15 (Château-Renault), Mer 16h30-18h00 (Monnaie)",
         nextMatch: "À venir",
-        players: []
+        players: [
+            { name: "Elina BILLAUD", number: "", position: "" },
+            { name: "Leonie BILLY", number: "", position: "" },
+            { name: "Alyssia CHEKIOUA", number: "", position: "" },
+            { name: "Sélène COUPÉ", number: "", position: "" },
+            { name: "Anaïs GARONNE", number: "", position: "" },
+            { name: "Lilwenn HAMON", number: "", position: "" },
+            { name: "Victoria HEBERT", number: "", position: "" },
+            { name: "Camille JASNIAK", number: "", position: "" },
+            { name: "Maelysse MARIE-ANNE", number: "", position: "" },
+            { name: "Célia MAUNY", number: "", position: "" },
+            { name: "Jade PORCHER", number: "", position: "" }
+        ]
     },
     {
         id: 7,
         name: "U15 F2",
         category: "U15 FÉMININ 2",
-        coach: "En attente...",
-        training: "Consulter le planning",
+        coach: "Mehdi BONNIN, Anna Lynn PERRAULT",
+        training: "Lun 18h45-20h15 (Château-Renault), Mer 16h30-18h00 (Monnaie)",
         nextMatch: "À venir",
         players: []
     },
@@ -75,8 +133,8 @@ const teams = [
         id: 8,
         name: "U18 F",
         category: "U18 FÉMININ",
-        coach: "En attente...",
-        training: "Consulter le planning",
+        coach: "Christian WEINLING",
+        training: "Mer 18h00-19h30 (Monnaie), Ven 18h15-19h45 (Monnaie)",
         nextMatch: "À venir",
         players: []
     }
@@ -505,7 +563,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.18.14.58";
+        const version = "v2026.01.18.16.20";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

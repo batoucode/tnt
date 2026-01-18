@@ -186,7 +186,7 @@ function initHeaderScroll() {
         if (currentScroll > 100) {
             header.style.padding = '12px 0';
             header.style.backgroundColor = 'rgba(13, 13, 13, 0.98)';
-            header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+            header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.4)';
         } else {
             header.style.padding = '20px 0';
             header.style.backgroundColor = 'rgba(13, 13, 13, 0.95)';
@@ -468,7 +468,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.18.14.04";
+        const version = "v2026.01.18.14.12";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

@@ -400,6 +400,7 @@ function renderGallery() {
 // Ajouter l'élément pour uploader des photos
 function addPhotoUploadElement() {
     const galleryContainer = document.getElementById('galleryContainer');
+    if (!galleryContainer) return;
 
     const addPhotoElement = document.createElement('div');
     addPhotoElement.className = 'add-photo-btn fade-in';
@@ -588,7 +589,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.18.16.25";
+        const version = "v2026.01.18.16.32";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

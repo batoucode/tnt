@@ -1274,35 +1274,32 @@ input:checked+.slider:before {
         font-size: 1.6rem;
     }
 
-    .logo-text p {
+    .logo-text p.ctc-text {
         font-size: 10px !important;
-        margin-top: -2px;
+        margin-top: -2px !important;
+        background: var(--chrome-gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 800;
+        letter-spacing: 1px;
     }
 
     .search-btn.mobile-only {
         display: flex;
         position: relative;
-        width: 60px;
+        width: 65px;
         height: 70px;
         background: var(--accent-orange);
         border: none;
-        border-radius: 40% 0 0 40%;
+        border-radius: 50% 0 0 50%;
         align-items: center;
         justify-content: center;
         color: white;
-        font-size: 22px;
+        font-size: 26px;
         box-shadow: -5px 0 20px rgba(255, 69, 0, 0.4);
-    }
-
-    .search-btn::before {
-        content: "\f0d1";
-        /* Basketball icon if possible or just use icon inside */
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-    }
-
-    .mobile-only {
-        display: flex;
+        margin-right: 0;
+        cursor: pointer;
     }
 
     .hero {

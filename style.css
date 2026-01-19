@@ -105,8 +105,8 @@ header {
 }
 
 .logo-img {
-    width: 70px;
-    height: 70px;
+    width: 74px;
+    height: 74px;
     background: var(--gradient-orange);
     border-radius: 50%;
     display: flex;
@@ -186,7 +186,7 @@ header {
 }
 
 .logo-text h1 {
-    font-size: 26px;
+    font-size: 28px;
     letter-spacing: 1px;
     background: var(--chrome-gradient);
     -webkit-background-clip: text;
@@ -198,7 +198,7 @@ header {
 }
 
 .logo-text h1 span {
-    font-size: 38px;
+    font-size: 40px;
     line-height: 0.9;
     font-weight: 900;
     font-style: italic;
@@ -211,7 +211,7 @@ header {
 }
 
 .logo-text p.ctc-text {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 800;
     letter-spacing: 2px;
     background: var(--chrome-gradient);
@@ -1275,23 +1275,23 @@ input:checked+.slider:before {
     }
 
     .logo-img {
-        width: 42px;
-        height: 42px;
+        width: 44px;
+        height: 44px;
         box-shadow: 0 0 10px var(--accent-orange-glow);
     }
 
     .logo-text h1 {
-        font-size: 0.5rem;
+        font-size: 0.52rem;
         line-height: 1;
         letter-spacing: 0.5px;
     }
 
     .logo-text h1 span {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
     .logo-text p.ctc-text {
-        font-size: 9px !important;
+        font-size: 10px !important;
         margin-top: -1px !important;
     }
 

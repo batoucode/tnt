@@ -1,4 +1,4 @@
-// Données pour les scores
+﻿// Données pour les scores
 const matchScores = [
     { id: 1, team1: "TNT U13 M1", team2: "Tours Basket", score1: 78, score2: 65, date: "15/10/2023", competition: "Championnat Départemental" },
     { id: 2, team1: "TNT Senior", team2: "Joue-les-Tours", score1: 92, score2: 88, date: "14/10/2023", competition: "Pré-Nationale" },
@@ -799,17 +799,37 @@ function showSuggestions() {
 function performSearch(query) {
     const searchResults = document.getElementById('searchResults');
     const normalizedQuery = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-    // Filtrer les résultats
-    const results = siteContent.filter(item => {
+    
+    // Filtrer les résultats dans les pages
+    const pageResults = siteContent.filter(item => {
         const titleMatch = item.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedQuery);
         const descMatch = item.description.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedQuery);
         const keywordMatch = item.keywords.some(keyword =>
             keyword.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedQuery)
         );
-
+        
         return titleMatch || descMatch || keywordMatch;
     });
+    
+    // Chercher dans les joueurs des équipes
+    const playerResults = [];
+    teams.forEach(team => {
+        team.players.forEach(player => {
+            const normalizedPlayerName = player.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            if (normalizedPlayerName.includes(normalizedQuery)) {
+                playerResults.push({
+                    title: player.name,
+                    description: `Joueur de l'équipe ${team.category}`,
+                    url: "equipes.html",
+                    category: "Joueur",
+                    teamName: team.category
+                });
+            }
+        });
+    });
+    
+    // Combiner les résultats
+    const results = [...pageResults, ...playerResults];
 
     // Afficher les résultats
     if (results.length === 0) {
@@ -822,7 +842,7 @@ function performSearch(query) {
                     <line x1="8" y1="11" x2="14" y2="11"></line>
                 </svg>
                 <h3>Aucun résultat trouvé</h3>
-                <p>Essayez avec d'autres mots-clés comme "équipes", "scores" ou "contact"</p>
+                <p>Essayez avec d'autres mots-clés comme "équipes", "scores" ou un nom de joueur</p>
             </div>
         `;
         return;
@@ -830,11 +850,11 @@ function performSearch(query) {
 
     // Limiter à 10 résultats
     const limitedResults = results.slice(0, 10);
-
+    
     let resultsHTML = `<div style="margin-bottom: 20px; color: var(--text-secondary); font-size: 0.95rem;">
         <strong>${results.length}</strong> résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}
     </div>`;
-
+    
     limitedResults.forEach(result => {
         const icon = getCategoryIcon(result.category);
         resultsHTML += `
@@ -856,11 +876,13 @@ function performSearch(query) {
     searchResults.innerHTML = resultsHTML;
 }
 
+
 // Icônes par catégorie
 function getCategoryIcon(category) {
     const icons = {
         'Page': '<svg class="search-result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>',
         'Équipe': '<svg class="search-result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+        'Joueur': '<svg class="search-result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>',
         'Match': '<svg class="search-result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>'
     };
     return icons[category] || icons['Page'];

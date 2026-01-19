@@ -12,17 +12,30 @@ const teams = [
         id: 1,
         name: "Séniors M",
         category: "SÉNIOR MASCULIN",
-        coach: "À renseigner",
+        coach: "A venir",
         training: "Mer 19h30-21h00 (Monnaie), Ven 19h45-21h00 (Monnaie)",
         nextMatch: "À venir",
-        players: []
+        players: [
+            { name: "Adrien CHERAMY", number: "", position: "" },
+            { name: "Clement CIAVALDINI-MARET", number: "", position: "" },
+            { name: "Sacha COURTIN", number: "", position: "" },
+            { name: "Laurent DEGRAEVE", number: "", position: "" },
+            { name: "Lucas HAUSSERAY", number: "", position: "" },
+            { name: "Claude-bernard LECOUFFE", number: "", position: "" },
+            { name: "Tom MARION MAURY", number: "", position: "" },
+            { name: "Johann PUISAIS", number: "", position: "" },
+            { name: "Gregory QUENAULT", number: "", position: "" },
+            { name: "Adrien ROUPIE", number: "", position: "" },
+            { name: "Malo SIBIRIL", number: "", position: "" },
+            { name: "Loic STEPHAN", number: "", position: "" }
+        ]
     },
     {
         id: 2,
         name: "U13 F",
         category: "U13 FÉMININ",
         coach: "Christian WEINLING",
-        training: "Mer 13h30-15h00 (Monnaie), Mer 18h30-20h00 (Château-Renault)",
+        training: "Mer 13h30-15h00 (Monnaie), Mer 18h30-20h00 (Châteaux-Renault)",
         nextMatch: "À venir",
         players: []
     },
@@ -31,7 +44,7 @@ const teams = [
         name: "U13 M1",
         category: "U13 MASCULIN 1",
         coach: "Clément CIAVALDINI-MARET, Nelson HUGUET",
-        training: "Lun 18h15-19h30 (Monnaie), Mer 15h30-16h30 (Château-Renault)",
+        training: "Lun 18h15-19h30 (Monnaie), Mer 15h30-16h45 (Château-Renault)",
         nextMatch: "À venir",
         players: [
             { name: "Cameron LECOUFFE", number: "", position: "" },
@@ -53,7 +66,7 @@ const teams = [
         name: "U13 M2",
         category: "U13 MASCULIN 2",
         coach: "Jean-Marie ROBIN, Adodo HOMAWOO",
-        training: "Mar 18h30-20h00 (Château-Renault), Mer 15h00-16h30 (Monnaie)",
+        training: "Mar 18h30-20h00 (Château-R), Mer 15h00-16h30 (Monnaie)",
         nextMatch: "À venir",
         players: [
             { name: "Septime AGNUS", number: "", position: "" },
@@ -79,7 +92,7 @@ const teams = [
         name: "U15 M",
         category: "U15 MASCULIN",
         coach: "Matteo MAILLE, Mickael PESSARD",
-        training: "Mar 20h00-21h30 (Château-Renault), Jeu 18h30-20h00 (Château-Renault)",
+        training: "Mar 20h00-21h30 (Château-R), Jeu 18h30-20h00 (Château-R)",
         nextMatch: "À venir",
         players: [
             { name: "Charly BEGAULT", number: "", position: "" },
@@ -104,13 +117,13 @@ const teams = [
         name: "U15 F1",
         category: "U15 FÉMININ 1",
         coach: "Mehdi BONNIN",
-        training: "Lun 18h45-20h15 (Château-Renault), Mer 16h30-18h00 (Monnaie)",
+        training: "Lun 18h45-20h15 (Château-R), Mer 16h30-18h00 (Monnaie)",
         nextMatch: "À venir",
         players: [
             { name: "Elina BILLAUD", number: "", position: "" },
             { name: "Leonie BILLY", number: "", position: "" },
             { name: "Alyssia CHEKIOUA", number: "", position: "" },
-            { name: "Sélène COUPÉ", number: "", position: "" },
+            { name: "Séléne COUPÉ", number: "", position: "" },
             { name: "Anaïs GARONNE", number: "", position: "" },
             { name: "Lilwenn HAMON", number: "", position: "" },
             { name: "Victoria HEBERT", number: "", position: "" },
@@ -125,9 +138,19 @@ const teams = [
         name: "U15 F2",
         category: "U15 FÉMININ 2",
         coach: "Mehdi BONNIN, Anna Lynn PERRAULT",
-        training: "Lun 18h45-20h15 (Château-Renault), Mer 16h30-18h00 (Monnaie)",
+        training: "Lun 18h45-20h15 (Château-R), Mer 16h30-18h00 (Monnaie)",
         nextMatch: "À venir",
-        players: []
+        players: [
+            { name: "Emma BOURHIS", number: "", position: "" },
+            { name: "Mellya CHERGUI MEHANNECHE", number: "", position: "" },
+            { name: "Camille DE IZARRA", number: "", position: "" },
+            { name: "Kadiatou DIALLO", number: "", position: "" },
+            { name: "Emilie FROUMENTY", number: "", position: "" },
+            { name: "Juliette HUGUET", number: "", position: "" },
+            { name: "Neia LI WOUNG KI", number: "", position: "" },
+            { name: "Lola LOISEAU", number: "", position: "" },
+            { name: "Coralie TERRASSIN", number: "", position: "" }
+        ]
     },
     {
         id: 8,
@@ -136,7 +159,21 @@ const teams = [
         coach: "Christian WEINLING",
         training: "Mer 18h00-19h30 (Monnaie), Ven 18h15-19h45 (Monnaie)",
         nextMatch: "À venir",
-        players: []
+        players: [
+            { name: "Pauline BLOT", number: "", position: "" },
+            { name: "Sarah CAZANAVE", number: "", position: "" },
+            { name: "Séléne COUPÉ", number: "", position: "" },
+            { name: "Ela COUTAND", number: "", position: "" },
+            { name: "Nael GAUTIER", number: "", position: "" },
+            { name: "Lilwenn HAMON", number: "", position: "" },
+            { name: "Juliette LOISEAU", number: "", position: "" },
+            { name: "Veronica MAHOUKOU GHOUAMA", number: "", position: "" },
+            { name: "Lili MOALIC", number: "", position: "" },
+            { name: "Zoé PIRON", number: "", position: "" },
+            { name: "Luna RAPIN--HERAUD", number: "", position: "" },
+            { name: "Ines ROBIN", number: "", position: "" },
+            { name: "Lahna ROBIN", number: "", position: "" }
+        ]
     }
 ];
 

@@ -1218,10 +1218,11 @@ input:checked+.slider:before {
     }
 
     .logo-text h1 {
-        flex-direction: row;
-        align-items: baseline;
-        gap: 8px;
-        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+        font-size: 0.7rem;
+        line-height: 1.1;
     }
 
     .logo-text h1 span {
@@ -1229,14 +1230,18 @@ input:checked+.slider:before {
     }
 
     .logo-text p {
-        font-size: 11px !important;
-        margin-top: 0;
+        font-size: 10px !important;
+        margin-top: 2px;
     }
 
     .mobile-menu-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .hero {

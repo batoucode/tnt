@@ -195,6 +195,7 @@ header {
     display: flex;
     flex-direction: column;
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
 }
 
 .logo-text h1 span {
@@ -226,7 +227,7 @@ header {
 nav ul {
     display: flex;
     list-style: none;
-    gap: 30px;
+    gap: 20px;
 }
 
 nav ul li a {
@@ -241,6 +242,7 @@ nav ul li a {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    white-space: nowrap;
 }
 
 body.light-theme nav a {
@@ -273,6 +275,10 @@ nav a.active {
 nav a:hover:after,
 nav a.active:after {
     width: 100%;
+}
+
+.mobile-only {
+    display: none;
 }
 
 .mobile-menu-btn {

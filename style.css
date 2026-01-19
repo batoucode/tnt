@@ -1210,16 +1210,16 @@ input:checked+.slider:before {
 @media (max-width: 576px) {
     header .container {
         width: 100%;
-        padding: 0 15px;
+        padding: 0 5px;
     }
 
     header {
-        padding: 10px 0;
+        padding: 8px 0;
     }
 
     .logo-img {
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
     }
 
     .logo-text h1 {
@@ -1240,13 +1240,14 @@ input:checked+.slider:before {
     }
 
     .mobile-menu-btn {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
+        width: 46px;
+        height: 46px;
+        font-size: 26px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-right: -5px;
     }
 
     .hero {

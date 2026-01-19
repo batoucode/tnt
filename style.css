@@ -183,6 +183,13 @@ header {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-text h1 span {
+    font-size: 32px;
+    line-height: 1;
 }
 
 .logo-text p {
@@ -1201,8 +1208,39 @@ input:checked+.slider:before {
 }
 
 @media (max-width: 576px) {
+    header {
+        padding: 10px 0;
+    }
+
+    .logo-img {
+        width: 60px;
+        height: 60px;
+    }
+
     .logo-text h1 {
-        font-size: 1.5rem;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 8px;
+        font-size: 1rem;
+    }
+
+    .logo-text h1 span {
+        font-size: 1.8rem;
+    }
+
+    .logo-text p {
+        font-size: 11px !important;
+        margin-top: 0;
+    }
+
+    .mobile-menu-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .hero {
+        padding: 120px 0 60px;
     }
 
     .hero h2 {

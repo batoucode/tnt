@@ -655,7 +655,7 @@ function displayVersion() {
 const siteContent = [
     {
         title: "Accueil",
-        description: "La Team Nord Touraine (TNT) est une Coopération Territoriale de Clubs regroupant le Monnaie Basket Club et l'AB Château-Renault.",
+        description: "La Team Nord Touraine (TNT) est une Coopération Territoriale de Clubs regroupant le Monnaie Basket Club et Château-Renault.",
         url: "index.html",
         keywords: ["accueil", "tnt", "team", "nord", "touraine", "basket", "club", "monnaie", "chateau-renault"],
         category: "Page"

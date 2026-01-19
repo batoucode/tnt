@@ -1208,6 +1208,10 @@ input:checked+.slider:before {
 }
 
 @media (max-width: 576px) {
+    header .container {
+        padding: 0 10px;
+    }
+
     header {
         padding: 10px 0;
     }

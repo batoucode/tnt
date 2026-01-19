@@ -3,9 +3,11 @@
     --primary-bg: #0D0D0D;
     --secondary-bg: #1A1A1A;
     --accent-orange: #FF6B00;
-    --accent-orange-light: #FF8E3C;
-    --accent-orange-dark: #CC5500;
-    --accent-glow: rgba(255, 107, 0, 0.2);
+    --accent-orange-vibrant: linear-gradient(135deg, #FF3D00, #FFD600);
+    --accent-orange-red: linear-gradient(to right, #FF0000, #FF6B00);
+    --chrome-gradient: linear-gradient(to bottom, #FFFFFF 0%, #E0E0E0 45%, #BDBDBD 50%, #757575 55%, #BDBDBD 100%);
+    --bg-dark: #0D0D0D;
+    --accent-orange-glow: rgba(255, 107, 0, 0.4);
     --text-primary: #F0F0F0;
     --text-secondary: #BBBBBB;
     --card-bg: rgba(30, 30, 30, 0.7);
@@ -191,15 +193,27 @@ header {
 .logo-text h1 span {
     font-size: 38px;
     line-height: 0.9;
-    font-weight: 800;
+    font-weight: 900;
+    font-style: italic;
     margin-bottom: -2px;
+    background: linear-gradient(to bottom, #FF8E3C, #FF4500);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 10px rgba(255, 69, 0, 0.5));
 }
 
-.logo-text p {
-    color: #F0F0F0;
-    font-size: 13px;
+.logo-text p.ctc-text {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: var(--chrome-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.5));
     margin-top: 5px;
-    letter-spacing: 1px;
 }
 
 nav ul {

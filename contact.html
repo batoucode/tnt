@@ -123,6 +123,58 @@
         </div>
     </footer>
 
+
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay" id="searchOverlay"></div>
+        <div class="search-modal-content">
+            <button class="search-close-btn" id="searchCloseBtn" aria-label="Fermer">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="search-header">
+                <h2>Rechercher sur le site</h2>
+                <p>Tapez votre recherche ci-dessous</p>
+            </div>
+
+            <div class="search-input-wrapper">
+                <svg class="search-input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" id="searchInput" class="search-input"
+                    placeholder="Rechercher des équipes, scores, actualités..." autocomplete="off">
+                <button class="search-clear-btn" id="searchClearBtn" aria-label="Effacer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="search-results" id="searchResults">
+                <div class="search-suggestions">
+                    <p class="search-suggestions-title">Suggestions populaires :</p>
+                    <div class="search-tags">
+                        <button class="search-tag" data-query="équipes">Équipes</button>
+                        <button class="search-tag" data-query="scores">Scores</button>
+                        <button class="search-tag" data-query="contact">Contact</button>
+                        <button class="search-tag" data-query="galerie">Galerie</button>
+                        <button class="search-tag" data-query="basket">Basket</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 

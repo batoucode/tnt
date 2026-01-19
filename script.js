@@ -644,7 +644,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.19.15.00";
+        const version = "v2026.01.19.20.00";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
@@ -784,7 +784,7 @@ function showSuggestions() {
         <div class="search-suggestions">
             <p class="search-suggestions-title">Suggestions populaires :</p>
             <div class="search-tags">
-                <button class="search-tag" data-query="equipes">Équipes</button>
+                <button class="search-tag" data-query="équipes">Équipes</button>
                 <button class="search-tag" data-query="scores">Scores</button>
                 <button class="search-tag" data-query="contact">Contact</button>
                 <button class="search-tag" data-query="galerie">Galerie</button>
@@ -799,7 +799,7 @@ function showSuggestions() {
 function performSearch(query) {
     const searchResults = document.getElementById('searchResults');
     const normalizedQuery = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    
+
     // Filtrer les résultats dans les pages
     const pageResults = siteContent.filter(item => {
         const titleMatch = item.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedQuery);
@@ -807,10 +807,10 @@ function performSearch(query) {
         const keywordMatch = item.keywords.some(keyword =>
             keyword.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedQuery)
         );
-        
+
         return titleMatch || descMatch || keywordMatch;
     });
-    
+
     // Chercher dans les joueurs des équipes
     const playerResults = [];
     teams.forEach(team => {
@@ -827,7 +827,7 @@ function performSearch(query) {
             }
         });
     });
-    
+
     // Combiner les résultats
     const results = [...pageResults, ...playerResults];
 
@@ -850,11 +850,11 @@ function performSearch(query) {
 
     // Limiter à 10 résultats
     const limitedResults = results.slice(0, 10);
-    
+
     let resultsHTML = `<div style="margin-bottom: 20px; color: var(--text-secondary); font-size: 0.95rem;">
         <strong>${results.length}</strong> résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}
     </div>`;
-    
+
     limitedResults.forEach(result => {
         const icon = getCategoryIcon(result.category);
         resultsHTML += `

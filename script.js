@@ -222,6 +222,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Lightbox pour l'image de fusion
     initFusionLightbox();
+
+    // Initialisation de la recherche
+    initSearch();
 });
 
 // Lightbox pour l'image de fusion
@@ -644,4 +647,229 @@ function displayVersion() {
         const version = "v2026.01.19.15.00";
         versionDisplay.textContent = `Version: ${version}`;
     }
+}
+
+// ==================== SEARCH FUNCTIONALITY ====================
+
+// Contenu du site pour la recherche
+const siteContent = [
+    {
+        title: "Accueil",
+        description: "La Team Nord Touraine (TNT) est une Coopération Territoriale de Clubs regroupant le Monnaie Basket Club et l'AB Château-Renault.",
+        url: "index.html",
+        keywords: ["accueil", "tnt", "team", "nord", "touraine", "basket", "club", "monnaie", "chateau-renault"],
+        category: "Page"
+    },
+    {
+        title: "Le Club",
+        description: "Découvrez l'histoire de la TNT, une coopération territoriale de clubs pour faire rayonner le basket en Nord Touraine.",
+        url: "club.html",
+        keywords: ["club", "histoire", "ctc", "cooperation", "monnaie", "chateau-renault", "fusion"],
+        category: "Page"
+    },
+    {
+        title: "Scores",
+        description: "Consultez tous les résultats des matchs de nos équipes TNT.",
+        url: "scores.html",
+        keywords: ["scores", "resultats", "matchs", "victoires", "championnat"],
+        category: "Page"
+    },
+    {
+        title: "Galerie",
+        description: "Découvrez nos photos d'entraînements, matchs et événements du club.",
+        url: "galerie.html",
+        keywords: ["galerie", "photos", "images", "entrainement", "match", "evenements"],
+        category: "Page"
+    },
+    {
+        title: "Équipes",
+        description: "Découvrez toutes nos équipes : Séniors, U18, U15, U13, Féminines et Masculines.",
+        url: "equipes.html",
+        keywords: ["equipes", "seniors", "u18", "u15", "u13", "feminin", "masculin", "joueurs"],
+        category: "Page"
+    },
+    {
+        title: "Contact",
+        description: "Contactez-nous pour toute question ou pour rejoindre le club.",
+        url: "contact.html",
+        keywords: ["contact", "email", "telephone", "adresse", "inscription"],
+        category: "Page"
+    }
+];
+
+// Initialisation de la recherche
+function initSearch() {
+    const searchBtn = document.getElementById('searchBtn');
+    const searchModal = document.getElementById('searchModal');
+    const searchOverlay = document.getElementById('searchOverlay');
+    const searchCloseBtn = document.getElementById('searchCloseBtn');
+    const searchInput = document.getElementById('searchInput');
+    const searchClearBtn = document.getElementById('searchClearBtn');
+    const searchResults = document.getElementById('searchResults');
+
+    if (!searchBtn || !searchModal) return;
+
+    // Ouvrir le modal
+    searchBtn.addEventListener('click', () => {
+        searchModal.classList.add('active');
+        setTimeout(() => {
+            searchInput.focus();
+        }, 300);
+    });
+
+    // Fermer le modal
+    function closeSearch() {
+        searchModal.classList.remove('active');
+        searchInput.value = '';
+        searchClearBtn.classList.remove('visible');
+        showSuggestions();
+    }
+
+    searchCloseBtn.addEventListener('click', closeSearch);
+    searchOverlay.addEventListener('click', closeSearch);
+
+    // Fermer avec Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+            closeSearch();
+        }
+    });
+
+    // Recherche en temps réel
+    searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim();
+
+        if (query.length > 0) {
+            searchClearBtn.classList.add('visible');
+            performSearch(query);
+        } else {
+            searchClearBtn.classList.remove('visible');
+            showSuggestions();
+        }
+    });
+
+    // Bouton clear
+    searchClearBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchClearBtn.classList.remove('visible');
+        searchInput.focus();
+        showSuggestions();
+    });
+
+    // Tags de suggestion
+    attachTagListeners();
+
+    // Afficher les suggestions par défaut
+    showSuggestions();
+}
+
+// Attacher les événements aux tags
+function attachTagListeners() {
+    const searchTags = document.querySelectorAll('.search-tag');
+    searchTags.forEach(tag => {
+        tag.addEventListener('click', () => {
+            const query = tag.getAttribute('data-query');
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = query;
+            document.getElementById('searchClearBtn').classList.add('visible');
+            performSearch(query);
+        });
+    });
+}
+
+// Afficher les suggestions
+function showSuggestions() {
+    const searchResults = document.getElementById('searchResults');
+    searchResults.innerHTML = `
+        <div class="search-suggestions">
+            <p class="search-suggestions-title">Suggestions populaires :</p>
+            <div class="search-tags">
+                <button class="search-tag" data-query="equipes">Équipes</button>
+                <button class="search-tag" data-query="scores">Scores</button>
+                <button class="search-tag" data-query="contact">Contact</button>
+                <button class="search-tag" data-query="galerie">Galerie</button>
+                <button class="search-tag" data-query="basket">Basket</button>
+            </div>
+        </div>
+    `;
+    attachTagListeners();
+}
+
+// Effectuer la recherche
+function performSearch(query) {
+    const searchResults = document.getElementById('searchResults');
+    const normalizedQuery = query.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+    // Filtrer les résultats
+    const results = siteContent.filter(item => {
+        const titleMatch = item.title.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedQuery);
+        const descMatch = item.description.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedQuery);
+        const keywordMatch = item.keywords.some(keyword =>
+            keyword.normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes(normalizedQuery)
+        );
+
+        return titleMatch || descMatch || keywordMatch;
+    });
+
+    // Afficher les résultats
+    if (results.length === 0) {
+        searchResults.innerHTML = `
+            <div class="search-no-results">
+                <svg class="search-no-results-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+                <h3>Aucun résultat trouvé</h3>
+                <p>Essayez avec d'autres mots-clés comme "équipes", "scores" ou "contact"</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Limiter à 10 résultats
+    const limitedResults = results.slice(0, 10);
+
+    let resultsHTML = `<div style="margin-bottom: 20px; color: var(--text-secondary); font-size: 0.95rem;">
+        <strong>${results.length}</strong> résultat${results.length > 1 ? 's' : ''} trouvé${results.length > 1 ? 's' : ''}
+    </div>`;
+
+    limitedResults.forEach(result => {
+        const icon = getCategoryIcon(result.category);
+        resultsHTML += `
+            <div class="search-result-item" onclick="window.location.href='${result.url}'">
+                <div class="search-result-title">
+                    ${icon}
+                    ${highlightQuery(result.title, query)}
+                </div>
+                <div class="search-result-description">
+                    ${highlightQuery(result.description, query)}
+                </div>
+                <div class="search-result-meta">
+                    <span class="search-result-badge">${result.category}</span>
+                </div>
+            </div>
+        `;
+    });
+
+    searchResults.innerHTML = resultsHTML;
+}
+
+// Icônes par catégorie
+function getCategoryIcon(category) {
+    const icons = {
+        'Page': '<svg class="search-result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>',
+        'Équipe': '<svg class="search-result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+        'Match': '<svg class="search-result-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>'
+    };
+    return icons[category] || icons['Page'];
+}
+
+// Surligner la requête dans le texte
+function highlightQuery(text, query) {
+    if (!query) return text;
+
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<strong style="color: var(--accent-orange);">$1</strong>');
 }

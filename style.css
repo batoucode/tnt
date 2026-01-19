@@ -105,8 +105,8 @@ header {
 }
 
 .logo-img {
-    width: 74px;
-    height: 74px;
+    width: 100px;
+    height: 100px;
     background: var(--gradient-orange);
     border-radius: 50%;
     display: flex;
@@ -186,7 +186,7 @@ header {
 }
 
 .logo-text h1 {
-    font-size: 28px;
+    font-size: 42px;
     letter-spacing: 1px;
     background: var(--chrome-gradient);
     -webkit-background-clip: text;
@@ -198,7 +198,7 @@ header {
 }
 
 .logo-text h1 span {
-    font-size: 40px;
+    font-size: 58px;
     line-height: 0.9;
     font-weight: 900;
     font-style: italic;
@@ -211,7 +211,7 @@ header {
 }
 
 .logo-text p.ctc-text {
-    font-size: 15px;
+    font-size: 23px;
     font-weight: 800;
     letter-spacing: 2px;
     background: var(--chrome-gradient);
@@ -233,7 +233,7 @@ nav ul li a {
     text-decoration: none;
     color: var(--text-primary);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.3s ease;
@@ -1275,23 +1275,23 @@ input:checked+.slider:before {
     }
 
     .logo-img {
-        width: 44px;
-        height: 44px;
+        width: 58px;
+        height: 58px;
         box-shadow: 0 0 10px var(--accent-orange-glow);
     }
 
     .logo-text h1 {
-        font-size: 0.52rem;
+        font-size: 0.72rem;
         line-height: 1;
         letter-spacing: 0.5px;
     }
 
     .logo-text h1 span {
-        font-size: 1.6rem;
+        font-size: 1.8rem;
     }
 
     .logo-text p.ctc-text {
-        font-size: 10px !important;
+        font-size: 14px !important;
         margin-top: -1px !important;
     }
 

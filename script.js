@@ -387,53 +387,163 @@ function initScrollAnimations() {
 }
 
 // Afficher les scores
+// Variables globales pour le carrousel
+let currentScoreIndex = 0;
+
+// Afficher les scores
 function renderScores() {
     const scoresContainer = document.getElementById('scoresContainer');
     if (!scoresContainer) return;
 
     scoresContainer.innerHTML = '';
 
-    // Si on est sur la page d'accueil, on ne montre que les 2 derniers scores
+    // Si on est sur la page d'accueil
     const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || !window.location.pathname.includes('.html');
-    const scoresToShow = isHomePage ? currentScores.slice(0, 2) : currentScores;
 
-    scoresToShow.forEach(match => {
-        const scoreCard = document.createElement('div');
-        scoreCard.className = 'score-card fade-in';
+    if (isHomePage) {
+        // Logique Carrousel
+        const isMobile = window.innerWidth <= 768;
+        const itemsToShow = isMobile ? 1 : 2; // 1 sur mobile, 2 sur PC
 
-        // Déterminer le gagnant pour le style
-        const winner = match.score1 > match.score2 ? 'team1' : 'team2';
+        // Créer le conteneur du carrousel
+        const carouselWrapper = document.createElement('div');
+        carouselWrapper.className = 'carousel-wrapper';
+        carouselWrapper.style.display = 'flex';
+        carouselWrapper.style.alignItems = 'center';
+        carouselWrapper.style.justifyContent = 'center';
+        carouselWrapper.style.gap = '20px';
+        carouselWrapper.style.position = 'relative';
 
-        scoreCard.innerHTML = `
-            <div class="match-title" style="text-align: center; margin-bottom: 20px;">
-                <h3 style="color: var(--accent-orange); font-size: 1.5rem; text-transform: uppercase;">MATCH ${match.team1}</h3>
-            </div>
-            <div class="teams">
-                <div class="team">
-                    <div class="team-logo" style="background: transparent; border: none; box-shadow: none; width: 80px; height: 80px;">
-                        <img src="img/logo TNT sans fond.png" alt="TNT" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.5));">
-                    </div>
-                    <div class="team-name">${match.team1}</div>
+        // Bouton Précédent
+        const prevBtn = document.createElement('button');
+        prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        prevBtn.style.background = 'rgba(255, 107, 0, 0.1)';
+        prevBtn.style.border = '2px solid var(--accent-orange)';
+        prevBtn.style.color = 'var(--accent-orange)';
+        prevBtn.style.borderRadius = '50%';
+        prevBtn.style.width = '40px';
+        prevBtn.style.height = '40px';
+        prevBtn.style.cursor = 'pointer';
+        prevBtn.style.display = 'flex'; // Centrage icône
+        prevBtn.style.alignItems = 'center';
+        prevBtn.style.justifyContent = 'center';
+        prevBtn.onclick = () => {
+            currentScoreIndex--;
+            if (currentScoreIndex < 0) {
+                // Si on va trop loin en arrière, on va à la fin (en s'assurant d'avoir assez d'éléments pour remplir la vue)
+                currentScoreIndex = Math.max(0, currentScores.length - itemsToShow);
+                if (currentScoreIndex < 0) currentScoreIndex = 0; // Sécurité si moins d'items que itemsToShow
+            }
+            renderScores();
+        };
+
+        // Bouton Suivant
+        const nextBtn = document.createElement('button');
+        nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        nextBtn.style.background = 'rgba(255, 107, 0, 0.1)';
+        nextBtn.style.border = '2px solid var(--accent-orange)';
+        nextBtn.style.color = 'var(--accent-orange)';
+        nextBtn.style.borderRadius = '50%';
+        nextBtn.style.width = '40px';
+        nextBtn.style.height = '40px';
+        nextBtn.style.cursor = 'pointer';
+        nextBtn.style.display = 'flex';
+        nextBtn.style.alignItems = 'center';
+        nextBtn.style.justifyContent = 'center';
+        nextBtn.onclick = () => {
+            currentScoreIndex++;
+            if (currentScoreIndex > currentScores.length - itemsToShow) {
+                currentScoreIndex = 0; // Retour au début
+            }
+            renderScores();
+        };
+
+        // Conteneur des cartes (grille responsive)
+        const cardsGrid = document.createElement('div');
+        cardsGrid.style.display = 'grid';
+        cardsGrid.style.gridTemplateColumns = isMobile ? '1fr' : '1fr 1fr';
+        cardsGrid.style.gap = '20px';
+        cardsGrid.style.width = '100%';
+
+        // Sélectionner les scores à afficher
+        // On s'assure que l'index est valide
+        if (currentScoreIndex > currentScores.length - itemsToShow && currentScores.length >= itemsToShow) {
+            currentScoreIndex = 0;
+        }
+
+        const scoresSlice = currentScores.slice(currentScoreIndex, currentScoreIndex + itemsToShow);
+
+        scoresSlice.forEach(match => {
+            const scoreCard = createScoreCard(match);
+            scoreCard.style.width = '100%'; // Prendre toute la largeur de la cellule
+            scoreCard.style.margin = '0'; // Reset margin
+            cardsGrid.appendChild(scoreCard);
+        });
+
+        // Assemblage
+        if (currentScores.length > itemsToShow) carouselWrapper.appendChild(prevBtn);
+        carouselWrapper.appendChild(cardsGrid);
+        if (currentScores.length > itemsToShow) carouselWrapper.appendChild(nextBtn);
+
+        scoresContainer.appendChild(carouselWrapper);
+
+        // Ajouter un écouteur de redimensionnement pour re-rendu si on passe de mobile à desktop
+        if (!window.resizeListenerAdded) {
+            window.addEventListener('resize', () => {
+                renderScores();
+            });
+            window.resizeListenerAdded = true;
+        }
+
+    } else {
+        // Page Scores : Affichage normal en grille
+        scoresContainer.style.display = 'grid';
+        scoresContainer.style.gridTemplateColumns = 'repeat(auto-fit, minmax(350px, 1fr))';
+        scoresContainer.style.gap = '35px';
+
+        currentScores.forEach(match => {
+            const scoreCard = createScoreCard(match);
+            scoresContainer.appendChild(scoreCard);
+        });
+    }
+}
+
+// Fonction helper pour créer une carte de score (évite la duplication)
+function createScoreCard(match) {
+    const scoreCard = document.createElement('div');
+    scoreCard.className = 'score-card fade-in';
+
+    // Déterminer le gagnant pour le style
+    const winner = match.score1 > match.score2 ? 'team1' : 'team2';
+
+    scoreCard.innerHTML = `
+        <div class="match-title" style="text-align: center; margin-bottom: 20px;">
+            <h3 style="color: var(--accent-orange); font-size: 1.5rem; text-transform: uppercase;">MATCH ${match.team1}</h3>
+        </div>
+        <div class="teams">
+            <div class="team">
+                <div class="team-logo" style="background: transparent; border: none; box-shadow: none; width: 80px; height: 80px;">
+                    <img src="img/logo TNT sans fond.png" alt="TNT" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.5));">
                 </div>
-                <div class="vs">VS</div>
-                <div class="team">
-                    <div class="team-logo">${match.team2.substring(0, 3).toUpperCase()}</div>
-                    <div class="team-name">${match.team2}</div>
-                </div>
+                <div class="team-name">${match.team1}</div>
             </div>
-            <div class="score">
-                <span class="${winner === 'team1' ? 'winner' : ''}">${match.score1}</span>
-                <span> - </span>
-                <span class="${winner === 'team2' ? 'winner' : ''}">${match.score2}</span>
+            <div class="vs">VS</div>
+            <div class="team">
+                <div class="team-logo">${match.team2.substring(0, 3).toUpperCase()}</div>
+                <div class="team-name">${match.team2}</div>
             </div>
-            <div class="match-info">
-                <p><strong>Compétition:</strong> ${match.competition}</p>
-                <p><strong>Date:</strong> ${match.date}</p>
-            </div>
-        `;
-
-        scoresContainer.appendChild(scoreCard);
-    });
+        </div>
+        <div class="score">
+            <span class="${winner === 'team1' ? 'winner' : ''}">${match.score1}</span>
+            <span> - </span>
+            <span class="${winner === 'team2' ? 'winner' : ''}">${match.score2}</span>
+        </div>
+        <div class="match-info">
+            <p><strong>Compétition:</strong> ${match.competition}</p>
+            <p><strong>Date:</strong> ${match.date}</p>
+        </div>
+    `;
+    return scoreCard;
 }
 
 // Afficher la galerie
@@ -655,7 +765,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.24.19.38";
+        const version = "2026.01.24.19.45";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

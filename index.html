@@ -127,9 +127,23 @@
                 <h2>VOTRE CLUB EN <span>CHIFFRES</span></h2>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div style="display: flex; flex-direction: column; gap: 40px;">
+                <!-- Scores Preview -->
+                <div style="background: var(--card-bg); padding: 40px; border-radius: 30px; border: 1px solid var(--border-color); text-align: center; width: 100%;"
+                    class="fade-in">
+                    <i class="fas fa-trophy"
+                        style="font-size: 3rem; color: var(--accent-orange); margin-bottom: 20px;"></i>
+                    <h3>Derniers Résultats</h3>
+                    <div id="scoresContainer" style="margin-bottom: 20px; min-height: 200px;">
+                        <!-- Les scores seront ajoutés dynamiquement par JavaScript -->
+                    </div>
+                    <a href="scores.html"
+                        style="color: var(--accent-orange); font-weight: 700; text-decoration: none;">Tous les scores <i
+                            class="fas fa-arrow-right"></i></a>
+                </div>
+
                 <!-- Club Teaser -->
-                <div style="background: var(--card-bg); padding: 40px; border-radius: 30px; border: 1px solid var(--border-color); text-align: center;"
+                <div style="background: var(--card-bg); padding: 40px; border-radius: 30px; border: 1px solid var(--border-color); text-align: center; width: 100%;"
                     class="fade-in">
                     <i class="fas fa-users"
                         style="font-size: 3rem; color: var(--accent-orange); margin-bottom: 20px;"></i>
@@ -141,22 +155,8 @@
                             class="fas fa-arrow-right"></i></a>
                 </div>
 
-                <!-- Scores Preview -->
-                <div style="background: var(--card-bg); padding: 40px; border-radius: 30px; border: 1px solid var(--border-color); text-align: center;"
-                    class="fade-in">
-                    <i class="fas fa-trophy"
-                        style="font-size: 3rem; color: var(--accent-orange); margin-bottom: 20px;"></i>
-                    <h3>Derniers Résultats</h3>
-                    <div id="scoresContainer" style="margin-bottom: 20px;">
-                        <!-- Les 2 derniers scores s'afficheront ici -->
-                    </div>
-                    <a href="scores.html"
-                        style="color: var(--accent-orange); font-weight: 700; text-decoration: none;">Tous les scores <i
-                            class="fas fa-arrow-right"></i></a>
-                </div>
-
                 <!-- Gallery Teaser -->
-                <div style="background: var(--card-bg); padding: 40px; border-radius: 30px; border: 1px solid var(--border-color); text-align: center;"
+                <div style="background: var(--card-bg); padding: 40px; border-radius: 30px; border: 1px solid var(--border-color); text-align: center; width: 100%;"
                     class="fade-in">
                     <i class="fas fa-camera"
                         style="font-size: 3rem; color: var(--accent-orange); margin-bottom: 20px;"></i>

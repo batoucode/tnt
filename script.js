@@ -500,7 +500,7 @@ function renderTeams() {
                 <h3>${team.category}</h3>
             </div>
             <div class="team-card-body">
-                ${team.photo ? `<div class="team-photo"><img src="${team.photo}" alt="Photo ${team.name}" style="width:100%; border-radius:8px; margin-bottom:15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>` : ''}
+                ${team.photo ? `<div class="team-photo" onclick="openLightbox({url: '${team.photo}', title: '${team.name}'})" style="cursor: pointer;"><img src="${team.photo}" alt="Photo ${team.name}" style="width:100%; border-radius:8px; margin-bottom:15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>` : ''}
                 <div class="team-info">
                     <div class="team-info-item">
                         <span>Entraîneur:</span>
@@ -648,7 +648,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.24.18.45";
+        const version = "2026.01.24.18.52";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

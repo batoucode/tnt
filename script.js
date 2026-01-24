@@ -1,9 +1,6 @@
 ﻿// Données pour les scores
 const matchScores = [
-    { id: 1, team1: "TNT U13 M1", team2: "Tours Basket", score1: 78, score2: 65, date: "15/10/2023", competition: "Championnat Départemental" },
-    { id: 2, team1: "TNT Senior", team2: "Joue-les-Tours", score1: 92, score2: 88, date: "14/10/2023", competition: "Pré-Nationale" },
-    { id: 3, team1: "TNT U15 F1", team2: "Amboise BC", score1: 45, score2: 52, date: "13/10/2023", competition: "Régional Féminin" },
-    { id: 4, team1: "TNT U18 M2", team2: "Fondettes", score1: 67, score2: 61, date: "12/10/2023", competition: "Championnat Régional" }
+    { id: 1, team1: "TNT U13 M1", team2: "AZAY CHEILLE", score1: 55, score2: 29, date: "24/01/2026", competition: "Championnat Départemental" }
 ];
 
 // Données pour les équipes
@@ -650,7 +647,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.24.18.55";
+        const version = "2026.01.24.19.00";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

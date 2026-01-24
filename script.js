@@ -413,6 +413,7 @@ function renderScores() {
         carouselWrapper.style.justifyContent = 'center';
         carouselWrapper.style.gap = '20px';
         carouselWrapper.style.position = 'relative';
+        carouselWrapper.style.width = '100%';
 
         // Bouton Précédent
         const prevBtn = document.createElement('button');
@@ -424,15 +425,16 @@ function renderScores() {
         prevBtn.style.width = '40px';
         prevBtn.style.height = '40px';
         prevBtn.style.cursor = 'pointer';
-        prevBtn.style.display = 'flex'; // Centrage icône
+        prevBtn.style.display = 'flex';
         prevBtn.style.alignItems = 'center';
         prevBtn.style.justifyContent = 'center';
+        prevBtn.style.flexShrink = '0'; // Fix: Empêcher le bouton de rétrécir
+        prevBtn.style.zIndex = '10';
         prevBtn.onclick = () => {
             currentScoreIndex--;
             if (currentScoreIndex < 0) {
-                // Si on va trop loin en arrière, on va à la fin (en s'assurant d'avoir assez d'éléments pour remplir la vue)
                 currentScoreIndex = Math.max(0, currentScores.length - itemsToShow);
-                if (currentScoreIndex < 0) currentScoreIndex = 0; // Sécurité si moins d'items que itemsToShow
+                if (currentScoreIndex < 0) currentScoreIndex = 0;
             }
             renderScores();
         };
@@ -450,10 +452,12 @@ function renderScores() {
         nextBtn.style.display = 'flex';
         nextBtn.style.alignItems = 'center';
         nextBtn.style.justifyContent = 'center';
+        nextBtn.style.flexShrink = '0'; // Fix: Empêcher le bouton de rétrécir
+        nextBtn.style.zIndex = '10';
         nextBtn.onclick = () => {
             currentScoreIndex++;
             if (currentScoreIndex > currentScores.length - itemsToShow) {
-                currentScoreIndex = 0; // Retour au début
+                currentScoreIndex = 0;
             }
             renderScores();
         };
@@ -463,10 +467,10 @@ function renderScores() {
         cardsGrid.style.display = 'grid';
         cardsGrid.style.gridTemplateColumns = isMobile ? '1fr' : '1fr 1fr';
         cardsGrid.style.gap = '20px';
-        cardsGrid.style.width = '100%';
+        cardsGrid.style.flex = '1'; // Fix: La grille prend l'espace restant
+        cardsGrid.style.width = 'auto'; // Fix: Pas de largeur fixe qui force le débordement
 
         // Sélectionner les scores à afficher
-        // On s'assure que l'index est valide
         if (currentScoreIndex > currentScores.length - itemsToShow && currentScores.length >= itemsToShow) {
             currentScoreIndex = 0;
         }
@@ -475,8 +479,8 @@ function renderScores() {
 
         scoresSlice.forEach(match => {
             const scoreCard = createScoreCard(match);
-            scoreCard.style.width = '100%'; // Prendre toute la largeur de la cellule
-            scoreCard.style.margin = '0'; // Reset margin
+            scoreCard.style.width = '100%';
+            scoreCard.style.margin = '0';
             cardsGrid.appendChild(scoreCard);
         });
 
@@ -487,7 +491,7 @@ function renderScores() {
 
         scoresContainer.appendChild(carouselWrapper);
 
-        // Ajouter un écouteur de redimensionnement pour re-rendu si on passe de mobile à desktop
+        // Ajouter un écouteur de redimensionnement
         if (!window.resizeListenerAdded) {
             window.addEventListener('resize', () => {
                 renderScores();
@@ -765,7 +769,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.24.19.45";
+        const version = "2026.01.24.19.53";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

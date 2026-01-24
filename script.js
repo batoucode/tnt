@@ -37,6 +37,7 @@ const teams = [
         coach: "Christian WEINLING",
         training: "Mer 13h30-15h00 (Monnaie), Mer 18h30-20h00 (Châteaux-Renault)",
         nextMatch: "À venir",
+        photo: "photos/photo%20d'equipes/U13F/2026-01-24%20183800.png",
         players: []
     },
     {
@@ -46,6 +47,7 @@ const teams = [
         coach: "Clément CIAVALDINI-MARET, Nelson HUGUET",
         training: "Lun 18h15-19h30 (Monnaie), Mer 15h30-16h45 (Château-Renault)",
         nextMatch: "À venir",
+        photo: "photos/photo%20d'equipes/U13M1/2026-01-24%20183702.png",
         players: [
             { name: "Cameron LECOUFFE", number: "", position: "" },
             { name: "Noah LEJEUNE", number: "", position: "" },
@@ -119,6 +121,7 @@ const teams = [
         coach: "Mehdi BONNIN",
         training: "Lun 18h45-20h15 (Château-R), Mer 16h30-18h00 (Monnaie)",
         nextMatch: "À venir",
+        photo: "photos/photo%20d'equipes/U15F/Screenshot%202026-01-24%20183907.png",
         players: [
             { name: "Elina BILLAUD", number: "", position: "" },
             { name: "Leonie BILLY", number: "", position: "" },
@@ -497,6 +500,7 @@ function renderTeams() {
                 <h3>${team.category}</h3>
             </div>
             <div class="team-card-body">
+                ${team.photo ? `<div class="team-photo"><img src="${team.photo}" alt="Photo ${team.name}" style="width:100%; border-radius:8px; margin-bottom:15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);"></div>` : ''}
                 <div class="team-info">
                     <div class="team-info-item">
                         <span>Entraîneur:</span>
@@ -644,7 +648,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "v2026.01.19.20.00";
+        const version = "2026.01.24.18.45";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

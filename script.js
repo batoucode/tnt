@@ -409,7 +409,9 @@ function renderScores() {
             </div>
             <div class="teams">
                 <div class="team">
-                    <div class="team-logo">TNT</div>
+                    <div class="team-logo" style="background: transparent; border: none; box-shadow: none; width: 80px; height: 80px;">
+                        <img src="img/logo TNT sans fond.png" alt="TNT" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.5));">
+                    </div>
                     <div class="team-name">${match.team1}</div>
                 </div>
                 <div class="vs">VS</div>
@@ -652,7 +654,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.24.19.16";
+        const version = "2026.01.24.19.20";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

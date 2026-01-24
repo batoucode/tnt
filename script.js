@@ -404,6 +404,9 @@ function renderScores() {
         const winner = match.score1 > match.score2 ? 'team1' : 'team2';
 
         scoreCard.innerHTML = `
+            <div class="match-title" style="text-align: center; margin-bottom: 20px;">
+                <h3 style="color: var(--accent-orange); font-size: 1.5rem; text-transform: uppercase;">MATCH ${match.team1}</h3>
+            </div>
             <div class="teams">
                 <div class="team">
                     <div class="team-logo">TNT</div>
@@ -649,7 +652,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.24.19.12";
+        const version = "2026.01.24.19.16";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

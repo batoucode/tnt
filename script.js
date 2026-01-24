@@ -410,8 +410,8 @@ function renderScores() {
                 </div>
                 <div class="vs">VS</div>
                 <div class="team">
-                    <div class="team-name">${match.team2}</div>
                     <div class="team-logo">${match.team2.substring(0, 3).toUpperCase()}</div>
+                    <div class="team-name">${match.team2}</div>
                 </div>
             </div>
             <div class="score">
@@ -648,7 +648,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.24.19.05";
+        const version = "2026.01.24.19.08";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

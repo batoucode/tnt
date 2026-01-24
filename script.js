@@ -96,6 +96,7 @@ const teams = [
         coach: "Matteo MAILLE, Mickael PESSARD",
         training: "Mar 20h00-21h30 (Château-R), Jeu 18h30-20h00 (Château-R)",
         nextMatch: "À venir",
+        photo: "photos/photo%20d'equipes/U15M/2026-01-24%20185219.png",
         players: [
             { name: "Charly BEGAULT", number: "", position: "" },
             { name: "Alex BERON BREDIF", number: "", position: "" },
@@ -121,7 +122,7 @@ const teams = [
         coach: "Mehdi BONNIN",
         training: "Lun 18h45-20h15 (Château-R), Mer 16h30-18h00 (Monnaie)",
         nextMatch: "À venir",
-        photo: "photos/photo%20d'equipes/U15F/Screenshot%202026-01-24%20183907.png",
+        photo: "photos/photo%20d'equipes/U15F1/Screenshot%202026-01-24%20183907.png",
         players: [
             { name: "Elina BILLAUD", number: "", position: "" },
             { name: "Leonie BILLY", number: "", position: "" },
@@ -143,6 +144,7 @@ const teams = [
         coach: "Mehdi BONNIN, Anna Lynn PERRAULT",
         training: "Lun 18h45-20h15 (Château-R), Mer 16h30-18h00 (Monnaie)",
         nextMatch: "À venir",
+        photo: "photos/photo%20d'equipes/U15F2/2026-01-24%20185136.png",
         players: [
             { name: "Emma BOURHIS", number: "", position: "" },
             { name: "Mellya CHERGUI MEHANNECHE", number: "", position: "" },
@@ -648,7 +650,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.24.18.52";
+        const version = "2026.01.24.18.55";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

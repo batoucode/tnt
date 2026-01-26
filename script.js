@@ -184,12 +184,23 @@ const teams = [
 
 // Images pour la galerie
 const galleryImages = [
-    { id: 1, url: "https://images.unsplash.com/photo-1544919982-b61976a0d7ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Entraînement U13" },
-    { id: 2, url: "https://images.unsplash.com/photo-1519861531473-920034658307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Victoire Senior" },
-    { id: 3, url: "https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Match U15 Féminin" },
-    { id: 4, url: "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Concentration avant match" },
-    { id: 5, url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Exercice de tir" },
-    { id: 6, url: "https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Esprit d'équipe" }
+    // Catégorie: Moments Forts
+    { id: 1, url: "https://images.unsplash.com/photo-1544919982-b61976a0d7ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Entraînement U13", category: "Moments Forts" },
+    { id: 2, url: "https://images.unsplash.com/photo-1519861531473-920034658307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Victoire Senior", category: "Moments Forts" },
+    { id: 3, url: "https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Match U15 Féminin", category: "Moments Forts" },
+    { id: 4, url: "https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Concentration avant match", category: "Moments Forts" },
+    { id: 5, url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Exercice de tir", category: "Moments Forts" },
+    { id: 6, url: "https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Esprit d'équipe", category: "Moments Forts" },
+
+    // Catégorie: Photo du weekend
+    {
+        id: 7,
+        url: "photos/photo d'equipes/U13M1/2026-01-24 183702.png",
+        title: "U13 M1",
+        category: "Photo du weekend",
+        type: "external",
+        link: "https://flic.kr/s/aHBqjCHJUv"
+    }
 ];
 
 // État de l'application
@@ -557,23 +568,68 @@ function renderGallery() {
 
     galleryContainer.innerHTML = '';
 
+    // Grouper les images par catégorie
+    const categories = {};
     currentGallery.forEach(image => {
-        const galleryItem = document.createElement('div');
-        galleryItem.className = 'gallery-item fade-in';
+        const cat = image.category || 'Autres';
+        if (!categories[cat]) {
+            categories[cat] = [];
+        }
+        categories[cat].push(image);
+    });
 
-        galleryItem.innerHTML = `
-            <img src="${image.url}" alt="${image.title}" loading="lazy">
-            <div class="gallery-item-overlay">
-                <p>${image.title}</p>
-            </div>
-        `;
+    // Afficher chaque catégorie
+    for (const [categoryName, images] of Object.entries(categories)) {
+        // Titre de la catégorie
+        const categoryTitle = document.createElement('h3');
+        categoryTitle.className = 'gallery-category-title fade-in';
+        categoryTitle.textContent = categoryName;
+        categoryTitle.style.width = '100%';
+        categoryTitle.style.marginBottom = '20px';
+        categoryTitle.style.marginTop = '40px';
+        categoryTitle.style.color = 'var(--accent-orange)';
+        categoryTitle.style.borderBottom = '2px solid var(--accent-orange)';
+        categoryTitle.style.paddingBottom = '10px';
+        galleryContainer.appendChild(categoryTitle);
 
-        galleryItem.addEventListener('click', function () {
-            openLightbox(image);
+        // Grid pour les images de cette catégorie
+        const categoryGrid = document.createElement('div');
+        categoryGrid.className = 'gallery-grid'; // Nouvelle classe pour le style si besoin
+        categoryGrid.style.display = 'grid';
+        categoryGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(280px, 1fr))';
+        categoryGrid.style.gap = '20px';
+        categoryGrid.style.width = '100%';
+        categoryGrid.style.marginBottom = '40px';
+
+        images.forEach(image => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item fade-in';
+
+            // Indicateur pour lien externe
+            const externalIcon = image.type === 'external' ? '<i class="fas fa-external-link-alt" style="position: absolute; top: 10px; right: 10px; color: white; background: rgba(0,0,0,0.5); padding: 5px; border-radius: 5px;"></i>' : '';
+
+            galleryItem.innerHTML = `
+                <img src="${image.url}" alt="${image.title}" loading="lazy">
+                ${externalIcon}
+                <div class="gallery-item-overlay">
+                    <p>${image.title}</p>
+                    ${image.type === 'external' ? '<span style="font-size: 0.8em; color: #ddd;">Voir l\'album sur Flickr</span>' : ''}
+                </div>
+            `;
+
+            galleryItem.addEventListener('click', function () {
+                if (image.type === 'external' && image.link) {
+                    window.open(image.link, '_blank');
+                } else {
+                    openLightbox(image);
+                }
+            });
+
+            categoryGrid.appendChild(galleryItem);
         });
 
-        galleryContainer.appendChild(galleryItem);
-    });
+        galleryContainer.appendChild(categoryGrid);
+    }
 }
 
 // Ajouter l'élément pour uploader des photos
@@ -769,7 +825,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.24.19.53";
+        const version = "2026.01.26.08.33";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

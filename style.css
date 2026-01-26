@@ -718,6 +718,7 @@ body.light-theme .hero p {
     opacity: 1;
     transform: translateY(0);
 }
+
 /* ==================== CONTENT SECTIONS ==================== */
 .content-section {
     padding: 100px 0;
@@ -1422,12 +1423,12 @@ footer::before {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background: var(--gradient-primary);
     box-shadow: var(--glow-orange);
 }
 
-input:checked + .slider::before {
+input:checked+.slider::before {
     transform: translateX(32px);
 }
 
@@ -1447,7 +1448,7 @@ input:checked + .slider::before {
     .hero h2 {
         font-size: 3.5rem;
     }
-    
+
     .section-title h2 {
         font-size: 3rem;
     }
@@ -1458,11 +1459,11 @@ input:checked + .slider::before {
     .container {
         width: 95%;
     }
-    
+
     .hero h2 {
         font-size: 3rem;
     }
-    
+
     .fusion-grid {
         gap: 60px;
     }
@@ -1473,17 +1474,17 @@ input:checked + .slider::before {
     .hero h2 {
         font-size: 2.8rem;
     }
-    
+
     .section-title h2 {
         font-size: 2.5rem;
     }
-    
+
     .fusion-grid {
         grid-template-columns: 1fr;
         gap: 50px;
         text-align: center;
     }
-    
+
     .fusion-text-content p {
         border-left: none;
         border-top: 4px solid var(--accent-orange);
@@ -1494,15 +1495,16 @@ input:checked + .slider::before {
 
 /* Tablet Portrait */
 @media (max-width: 768px) {
+
     /* Header Mobile */
     .mobile-menu-btn {
         display: block;
     }
-    
+
     .mobile-only {
         display: flex;
     }
-    
+
     nav ul {
         position: fixed;
         top: 50vh;
@@ -1526,7 +1528,7 @@ input:checked + .slider::before {
         z-index: 10002;
         display: none;
     }
-    
+
     nav ul::before {
         content: '';
         position: fixed;
@@ -1540,29 +1542,29 @@ input:checked + .slider::before {
         opacity: 0;
         transition: opacity var(--transition-base);
     }
-    
+
     nav ul.active {
         display: flex !important;
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
         visibility: visible;
     }
-    
+
     nav ul.active::before {
         opacity: 1;
     }
-    
+
     nav ul li {
         width: 100%;
         text-align: center;
         padding: 12px 0;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    
+
     nav ul li:last-child {
         border-bottom: none;
     }
-    
+
     nav ul li a {
         font-size: 1.3rem;
         color: white !important;
@@ -1570,37 +1572,37 @@ input:checked + .slider::before {
         -webkit-background-clip: text;
         background-clip: text;
     }
-    
+
     nav ul li a:hover,
     nav ul li a.active {
         background: var(--gradient-primary);
         -webkit-background-clip: text;
         background-clip: text;
     }
-    
+
     /* Hero Mobile */
     .hero {
         padding: 160px 0 100px;
     }
-    
+
     .hero h2 {
         font-size: 2.5rem;
     }
-    
+
     .hero p {
         font-size: 1.1rem;
     }
-    
+
     .hero-btns {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .hero-stats {
         flex-direction: column;
         gap: 30px;
     }
-    
+
     /* Sections Mobile */
     .content-section,
     .scores-section,
@@ -1608,27 +1610,27 @@ input:checked + .slider::before {
     .teams-section {
         padding: 70px 0;
     }
-    
+
     .section-title h2 {
         font-size: 2.2rem;
     }
-    
+
     /* Cards Mobile */
     .scores-container,
     .teams-container {
         grid-template-columns: 1fr;
     }
-    
+
     .gallery-container {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 20px;
     }
-    
+
     .gallery-item,
     .add-photo-btn {
         height: 220px;
     }
-    
+
     /* Footer Mobile */
     .footer-content {
         grid-template-columns: 1fr;
@@ -1638,97 +1640,98 @@ input:checked + .slider::before {
 
 /* Mobile */
 @media (max-width: 576px) {
+
     /* Header Mobile Compact */
     header {
         padding: 10px 0;
     }
-    
+
     .header-container {
         padding: 0 15px;
         gap: 12px;
     }
-    
+
     .logo-img {
         width: 60px;
         height: 60px;
     }
-    
+
     .logo-text h1 {
         font-size: 0.75rem;
         line-height: 1.1;
     }
-    
+
     .logo-text h1 span:first-child {
         font-size: 1.9rem;
     }
-    
+
     .logo-text h1 .sub-text {
         font-size: 0.75rem;
     }
-    
+
     .logo-text p.ctc-text {
         font-size: 15px !important;
         margin-top: 0 !important;
     }
-    
+
     .mobile-menu-btn {
         width: 45px;
         height: 45px;
         font-size: 20px;
     }
-    
+
     .search-btn.mobile-only {
         font-size: 18px;
     }
-    
+
     /* Hero Mobile Compact */
     .hero {
         padding: 140px 0 80px;
     }
-    
+
     .hero h2 {
         font-size: 2rem;
         margin-bottom: 20px;
     }
-    
+
     .hero h2::after {
         width: 100px;
         height: 4px;
     }
-    
+
     .hero p {
         font-size: 1rem;
         margin-bottom: 35px;
     }
-    
+
     .badge {
         font-size: 0.75rem;
         padding: 8px 18px;
         margin-bottom: 25px;
     }
-    
+
     .cta-button {
         padding: 15px 30px;
         font-size: 1rem;
     }
-    
+
     .stat-item {
         min-width: 100%;
         padding: 15px;
     }
-    
+
     .stat-number {
         font-size: 2.8rem;
     }
-    
+
     .stat-label {
         font-size: 0.9rem;
     }
-    
+
     .partner-logos img {
         height: 50px;
     }
-    
+
     /* Sections Mobile Compact */
     .content-section,
     .scores-section,
@@ -1737,105 +1740,105 @@ input:checked + .slider::before {
     .fusion-highlight {
         padding: 60px 0;
     }
-    
+
     .section-title {
         margin-bottom: 50px;
     }
-    
+
     .section-title h2 {
         font-size: 1.8rem;
         padding-bottom: 15px;
     }
-    
+
     .section-title h2::after {
         width: 80px;
         height: 4px;
     }
-    
+
     .fusion-text-content h2 {
         font-size: 2rem;
     }
-    
+
     /* Cards Mobile Compact */
     .score-card,
     .team-card-body {
         padding: 25px 20px;
     }
-    
+
     .team-card-header {
         padding: 25px 20px;
     }
-    
+
     .team-card-header h3 {
         font-size: 1.6rem;
     }
-    
+
     .score {
         font-size: 2.5rem;
         gap: 20px;
     }
-    
+
     .score span {
         min-width: 70px;
     }
-    
+
     .vs {
         font-size: 1.2rem;
         padding: 6px 12px;
     }
-    
+
     .team-logo {
         width: 45px;
         height: 45px;
         font-size: 14px;
     }
-    
+
     .team-name {
         font-size: 0.85rem;
     }
-    
+
     /* Gallery Mobile Compact */
     .gallery-container {
         grid-template-columns: 1fr;
         gap: 18px;
     }
-    
+
     .gallery-item,
     .add-photo-btn {
         height: 200px;
     }
-    
+
     /* Club Logos Mobile */
     .club-logos-container {
         flex-direction: column;
         gap: 25px;
     }
-    
+
     .club-logo-card {
         max-width: 100%;
     }
-    
+
     /* Footer Mobile Compact */
     footer {
         padding: 60px 0 25px;
     }
-    
+
     .footer-content {
         gap: 35px;
         margin-bottom: 40px;
     }
-    
+
     .footer-section h3 {
         font-size: 1.3rem;
         margin-bottom: 20px;
     }
-    
+
     .social-icons a {
         width: 45px;
         height: 45px;
         font-size: 1.1rem;
     }
-    
+
     .copyright {
         font-size: 0.85rem;
         padding-top: 25px;
@@ -1847,19 +1850,19 @@ input:checked + .slider::before {
     .logo-text h1 span:first-child {
         font-size: 1.6rem;
     }
-    
+
     .logo-text h1 .sub-text {
         font-size: 0.65rem;
     }
-    
+
     .hero h2 {
         font-size: 1.7rem;
     }
-    
+
     .section-title h2 {
         font-size: 1.6rem;
     }
-    
+
     .cta-button {
         padding: 12px 25px;
         font-size: 0.9rem;
@@ -1885,6 +1888,7 @@ input:checked + .slider::before {
 
 /* Accessibility */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -1896,13 +1900,14 @@ input:checked + .slider::before {
 
 /* Print Styles */
 @media print {
+
     header,
     footer,
     .mobile-menu-btn,
     .theme-switch-wrapper {
         display: none;
     }
-    
+
     body {
         background: white;
         color: black;
@@ -2333,4 +2338,12 @@ input:checked + .slider::before {
     .search-result-title {
         font-size: 1.1rem;
     }
+}
+
+/* Styles pour les catégories de la galerie */
+.gallery-category-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }

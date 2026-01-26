@@ -578,42 +578,54 @@ function renderGallery() {
         categories[cat].push(image);
     });
 
+    // Ordre d'affichage des catégories (Photo du weekend en premier)
+    const categoryOrder = ["Photo du weekend", "Moments Forts", "Autres"];
+    const sortedCategories = Object.keys(categories).sort((a, b) => {
+        const indexA = categoryOrder.indexOf(a);
+        const indexB = categoryOrder.indexOf(b);
+        // Si les deux sont dans list, trier par index
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        // Si seulement a est dans liste, a vient avant
+        if (indexA !== -1) return -1;
+        // Si seulement b est dans liste, b vient avant
+        if (indexB !== -1) return 1;
+        // Sinon ordre alphabétique
+        return a.localeCompare(b);
+    });
+
     // Afficher chaque catégorie
-    for (const [categoryName, images] of Object.entries(categories)) {
+    sortedCategories.forEach(categoryName => {
+        const images = categories[categoryName];
+
+        // Container pour la section
+        const sectionContainer = document.createElement('div');
+        sectionContainer.className = 'gallery-section-wrapper fade-in';
+        sectionContainer.style.marginBottom = '60px';
+
         // Titre de la catégorie
         const categoryTitle = document.createElement('h3');
-        categoryTitle.className = 'gallery-category-title fade-in';
+        categoryTitle.className = 'gallery-category-title';
         categoryTitle.textContent = categoryName;
-        categoryTitle.style.width = '100%';
-        categoryTitle.style.marginBottom = '20px';
-        categoryTitle.style.marginTop = '40px';
-        categoryTitle.style.color = 'var(--accent-orange)';
-        categoryTitle.style.borderBottom = '2px solid var(--accent-orange)';
-        categoryTitle.style.paddingBottom = '10px';
-        galleryContainer.appendChild(categoryTitle);
+        sectionContainer.appendChild(categoryTitle);
 
         // Grid pour les images de cette catégorie
         const categoryGrid = document.createElement('div');
-        categoryGrid.className = 'gallery-grid'; // Nouvelle classe pour le style si besoin
-        categoryGrid.style.display = 'grid';
-        categoryGrid.style.gridTemplateColumns = 'repeat(auto-fit, minmax(280px, 1fr))';
-        categoryGrid.style.gap = '20px';
-        categoryGrid.style.width = '100%';
-        categoryGrid.style.marginBottom = '40px';
+        categoryGrid.className = 'gallery-grid';
 
         images.forEach(image => {
             const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item fade-in';
+            galleryItem.className = 'gallery-item';
 
             // Indicateur pour lien externe
-            const externalIcon = image.type === 'external' ? '<i class="fas fa-external-link-alt" style="position: absolute; top: 10px; right: 10px; color: white; background: rgba(0,0,0,0.5); padding: 5px; border-radius: 5px;"></i>' : '';
+            const externalIcon = image.type === 'external' ? '<i class="fas fa-external-link-alt external-icon"></i>' : '';
+            const overlayText = image.type === 'external' ? '<span class="external-hint">Voir l\'album sur Flickr</span>' : '';
 
             galleryItem.innerHTML = `
                 <img src="${image.url}" alt="${image.title}" loading="lazy">
                 ${externalIcon}
                 <div class="gallery-item-overlay">
                     <p>${image.title}</p>
-                    ${image.type === 'external' ? '<span style="font-size: 0.8em; color: #ddd;">Voir l\'album sur Flickr</span>' : ''}
+                    ${overlayText}
                 </div>
             `;
 
@@ -628,8 +640,9 @@ function renderGallery() {
             categoryGrid.appendChild(galleryItem);
         });
 
-        galleryContainer.appendChild(categoryGrid);
-    }
+        sectionContainer.appendChild(categoryGrid);
+        galleryContainer.appendChild(sectionContainer);
+    });
 }
 
 // Ajouter l'élément pour uploader des photos

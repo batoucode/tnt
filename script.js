@@ -1,9 +1,74 @@
-﻿const matchScores = [
-    // { id: 1, team1: "TNT U13 M1", team2: "AZAY CHEILLE", score1: 55, score2: 29, date: "24/01/2026", competition: "Championnat Départemental" }, // Remplacé par le chargement dynamique
+﻿// Données pour les scores
+const matchScores = [
+    { id: 1, team1: "TNT U13 M1", team2: "AZAY CHEILLE", score1: 55, score2: 29, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 2, team1: "TNT U13 F", team2: "ESO", score1: 35, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 3, team1: "TNT U13 M2", team2: "Montlouis", score1: 24, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 4, team1: "TNT U15 F1", team2: "BOURGUEIL", score1: 47, score2: 40, date: "24/01/2026", competition: "Championnat Départemental" }
 ];
+
+// ... (existing code) ...
+
+// Charger les données externes (U13M1)
+function loadExternalData() {
+    // Utiliser un chemin relatif correct
+    const jsonPath = 'resultat_et_match_a_venir/U13M1/dernier_match.json';
+
+    fetch(jsonPath + '?t=' + new Date().getTime()) // Cache busting
+        .then(response => {
+            if (!response.ok) {
+                // Si échec (ex: local file system), on garde les données manuelles
+                throw new Error('Erreur chargement données U13M1 ou fichier local');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Données U13M1 chargées:", data);
+
+            // 1. Mise à jour du score
+            // Format attendu: "TNT 55 - 29 Basket Club Azay Cheille - 1"
+            const scoreRegex = /^(.*?) (\d+) - (\d+) (.*)$/;
+            const match = data.dernier_match.match(scoreRegex);
+
+            if (match) {
+                // Chercher l'entrée existante pour U13 M1
+                const existingScoreIndex = currentScores.findIndex(s => s.team1.includes("U13 M1") || s.id === 1);
+
+                if (existingScoreIndex !== -1) {
+                    // Update existing
+                    currentScores[existingScoreIndex].score1 = parseInt(match[2]);
+                    currentScores[existingScoreIndex].score2 = parseInt(match[3]);
+                    currentScores[existingScoreIndex].team2 = match[4];
+                    // On garde la date existante ou on met "Récemment"
+                } else {
+                    // Create new if not found
+                    const newScore = {
+                        id: 999,
+                        team1: "TNT U13 M1",
+                        team2: match[4],
+                        score1: parseInt(match[2]),
+                        score2: parseInt(match[3]),
+                        date: "Récemment",
+                        competition: "Championnat"
+                    };
+                    currentScores.unshift(newScore);
+                }
+
+                // Mettre à jour l'affichage des scores
+                renderScores();
+            }
+
+            // 2. Mise à jour du prochain match pour l'équipe U13 M1
+            const u13m1Team = teams.find(t => t.name === "U13 M1");
+            if (u13m1Team) {
+                u13m1Team.nextMatch = data.prochain_match;
+                // Mettre à jour l'affichage des équipes
+                renderTeams();
+            }
+        })
+        .catch(error => {
+            console.warn('Utilisation des données manuelles (fetch échoué):', error);
+        });
+}
 
 // Données pour les équipes
 const teams = [

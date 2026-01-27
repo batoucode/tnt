@@ -845,15 +845,15 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.10.41";
+        const version = "2026.01.27.10.49";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
 
 // Charger les données externes (U13M1)
 function loadExternalData() {
-    // Utiliser un chemin relatif correct
-    const jsonPath = 'resultat_et_match_a_venir/U13M1/dernier_match.json';
+    // Utiliser le chemin GitHub raw pour accéder au JSON
+    const jsonPath = 'https://raw.githubusercontent.com/batoucode/tnt/master/resultat_et_match_a_venir/U13M1/dernier_match.json';
 
     fetch(jsonPath + '?t=' + new Date().getTime()) // Cache busting
         .then(response => {
@@ -880,7 +880,7 @@ function loadExternalData() {
                     // Update existing
                     currentScores[existingScoreIndex].score1 = parseInt(match[2]);
                     currentScores[existingScoreIndex].score2 = parseInt(match[3]);
-                    currentScores[existingScoreIndex].team2 = match[4];
+                    currentScores[existingScoreIndex].team2 = match[4].replace(/\s*-\s*\d+$/, '');  // Nettoyer le " - 1", " - 2", etc.
                 } else {
                     // Create new if not found
                     const newScore = {

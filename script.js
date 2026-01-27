@@ -834,7 +834,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.12.36";
+        const version = "2026.01.27.14.50";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
@@ -899,7 +899,7 @@ function loadExternalData() {
             }
         })
         .catch(error => {
-            console.warn('Utilisation des données manuelles (fetch échoué):', error);
+            console.warn('Utilisation des données manuelles (fetch échoué ou bloqué par le navigateur):', error);
         });
 }
 

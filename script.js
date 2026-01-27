@@ -515,31 +515,37 @@ function createScoreCard(match) {
         <div class="match-title" style="text-align: center; margin-bottom: 20px;">
             <h3 style="color: var(--accent-orange); font-size: 1.5rem; text-transform: uppercase;">MATCH ${match.team1}</h3>
         </div>
-        <div class="teams">
-            <div class="team team-1">
+        <div class="teams-score-layout">
+            <div class="team-column team-1">
                 <div class="team-logo logo-tnt">
                     <img src="img/logo TNT sans fond.png" alt="TNT">
                 </div>
                 <div class="team-name">${match.team1}</div>
+                <div class="team-score ${winner === 'team1' ? 'winner' : ''}">${match.score1}</div>
             </div>
-            <div class="vs">VS</div>
-            <div class="team team-2">
+            
+            <div class="center-column">
+                <div class="vs">VS</div>
+                <div class="score-separator">-</div>
+            </div>
+            
+            <div class="team-column team-2">
                 <div class="team-logo">
                     ${match.team2.substring(0, 3).toUpperCase()}
                 </div>
                 <div class="team-name">${match.team2}</div>
+                <div class="team-score ${winner === 'team2' ? 'winner' : ''}">${match.score2}</div>
             </div>
         </div>
-        <div class="score">
-            <span class="${winner === 'team1' ? 'winner' : ''}">${match.score1}</span>
-            <span> - </span>
-            <span class="${winner === 'team2' ? 'winner' : ''}">${match.score2}</span>
-        </div>
+        
+        ${match.comment ? `
+        <div class="match-comment-box">
+            <p class="match-comment">"${match.comment}"</p>
+        </div>` : ''}
         <div class="match-info">
             <p><strong>Compétition:</strong> ${match.competition}</p>
             <p><strong>Date:</strong> ${match.date}</p>
-            ${match.comment ? `<p class="match-comment" style="color: var(--accent-orange); margin-top: 10px; font-style: italic;">"${match.comment}"</p>` : ''}
-            ${match.nextMatch ? `<p class="next-match-info" style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border-color); font-size: 0.9rem;"><strong>Prochain match:</strong><br>${match.nextMatch}</p>` : ''}
+            ${match.nextMatch ? `<p class="next-match-info"><strong>Prochain match:</strong><br>${match.nextMatch}</p>` : ''}
         </div>
     `;
     return scoreCard;
@@ -828,7 +834,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.12.12";
+        const version = "2026.01.27.12.24";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

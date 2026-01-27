@@ -1009,10 +1009,72 @@ body.light-theme .hero p {
 
 .match-info {
     color: var(--text-secondary);
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-align: center;
     border-top: 1px solid var(--border-color);
     padding-top: 20px;
+    margin-top: 15px;
+}
+
+/* New Vertical Layout Styles */
+.teams-score-layout {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.team-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    gap: 15px;
+}
+
+.center-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+    padding-top: 5px;
+}
+
+.team-score {
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: white;
+    margin-top: 5px;
+    line-height: 1;
+}
+
+.score-separator {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--text-tertiary);
+    margin-top: 10px;
+}
+
+.match-comment-box {
+    text-align: center;
+    margin: 15px 0 20px;
+}
+
+.match-comment {
+    color: var(--accent-orange);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.next-match-info {
+    margin-top: 15px !important;
+    padding-top: 15px !important;
+    border-top: 1px dashed var(--border-color) !important;
+    font-size: 0.9rem !important;
 }
 
 /* ==================== CAROUSEL STYLES ==================== */
@@ -1855,34 +1917,35 @@ input:checked+.slider::before {
         font-size: 1.1rem !important;
     }
 
-    .teams {
+    .teams-score-layout {
         margin-bottom: 15px !important;
         gap: 10px !important;
     }
 
-    .team {
-        gap: 5px !important;
+    .team-column {
+        gap: 8px !important;
     }
 
-    .team-card-header {
-        padding: 20px 15px;
+    .team-score {
+        font-size: 2.2rem !important;
     }
 
-    .team-card-header h3 {
-        font-size: 1.4rem;
+    .center-column {
+        gap: 15px !important;
+        padding-top: 2px !important;
     }
 
-    .score {
-        font-size: 1.8rem;
-        gap: 15px;
-        margin-bottom: 15px;
+    .score-separator {
+        font-size: 1.5rem !important;
+        margin-top: 5px !important;
     }
 
-    .vs {
-        width: 42px !important;
-        height: 42px !important;
-        font-size: 1rem !important;
-        padding: 0 !important;
+    .match-comment-box {
+        margin: 10px 0 15px !important;
+    }
+
+    .match-comment {
+        font-size: 0.85rem !important;
     }
 
     .team-logo {

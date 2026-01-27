@@ -387,21 +387,22 @@ function initHeaderScroll() {
 
 // Animation au scroll
 function initScrollAnimations() {
-    const fadeElements = document.querySelectorAll('.fade-in');
+    window.addEventListener('scroll', checkVisible);
+    checkVisible(); // Appel initial
+}
 
-    const fadeInOnScroll = function () {
-        fadeElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150;
+// Fonction pour vérifier et afficher les éléments (maintenant globale pour être appelée après render)
+function checkVisible() {
+    const fadeElements = document.querySelectorAll('.fade-in:not(.visible)');
 
-            if (elementTop < window.innerHeight - elementVisible) {
-                element.classList.add('visible');
-            }
-        });
-    };
+    fadeElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
 
-    window.addEventListener('scroll', fadeInOnScroll);
-    fadeInOnScroll(); // Appel initial
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('visible');
+        }
+    });
 }
 
 // Afficher les scores
@@ -528,6 +529,9 @@ function renderScores() {
             scoresContainer.appendChild(scoreCard);
         });
     }
+
+    // Déclencher l'animation pour les nouveaux éléments
+    checkVisible();
 }
 
 // Fonction helper pour créer une carte de score (évite la duplication)
@@ -650,6 +654,9 @@ function renderGallery() {
         sectionContainer.appendChild(categoryGrid);
         galleryContainer.appendChild(sectionContainer);
     });
+
+    // Déclencher l'animation pour les nouvelles images
+    checkVisible();
 }
 
 // Ajouter l'élément pour uploader des photos
@@ -721,6 +728,9 @@ function renderTeams() {
 
         teamsContainer.appendChild(teamCard);
     });
+
+    // Déclencher l'animation pour les nouvelles cartes d'équipes
+    checkVisible();
 }
 
 // Ajouter une nouvelle photo (simulation)
@@ -845,7 +855,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.11.19";
+        const version = "2026.01.27.11.23";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

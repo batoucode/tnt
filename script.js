@@ -857,7 +857,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.11.36";
+        const version = "2026.01.27.11.48";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

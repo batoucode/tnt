@@ -1763,39 +1763,81 @@ input:checked+.slider::before {
     /* Cards Mobile Compact */
     .score-card,
     .team-card-body {
-        padding: 25px 20px;
+        padding: 15px 12px;
+    }
+
+    .match-title {
+        margin-bottom: 12px !important;
+    }
+
+    .match-title h3 {
+        font-size: 1.1rem !important;
+    }
+
+    .teams {
+        margin-bottom: 15px !important;
+        gap: 10px !important;
+    }
+
+    .team {
+        gap: 5px !important;
     }
 
     .team-card-header {
-        padding: 25px 20px;
+        padding: 20px 15px;
     }
 
     .team-card-header h3 {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
 
     .score {
-        font-size: 2.5rem;
-        gap: 20px;
+        font-size: 1.8rem;
+        gap: 15px;
+        margin-bottom: 15px;
     }
 
     .score span {
-        min-width: 70px;
+        min-width: 50px;
     }
 
     .vs {
-        font-size: 1.2rem;
-        padding: 6px 12px;
+        font-size: 1rem;
+        padding: 4px 10px;
+        width: 35px;
+        height: 35px;
     }
 
     .team-logo {
-        width: 45px;
-        height: 45px;
-        font-size: 14px;
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+        border-width: 2px;
+    }
+
+    .team-logo img {
+        width: 80% !important;
+        height: 80% !important;
     }
 
     .team-name {
+        font-size: 0.75rem;
+        line-height: 1.2;
+    }
+
+    .match-info {
         font-size: 0.85rem;
+    }
+
+    .match-comment {
+        font-size: 0.8rem !important;
+        margin-top: 5px !important;
+    }
+
+    .next-match-info {
+        margin-top: 10px !important;
+        padding-top: 10px !important;
+        font-size: 0.8rem !important;
     }
 
     /* Gallery Mobile Compact */

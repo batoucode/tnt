@@ -567,6 +567,8 @@ function createScoreCard(match) {
         <div class="match-info">
             <p><strong>Compétition:</strong> ${match.competition}</p>
             <p><strong>Date:</strong> ${match.date}</p>
+            ${match.comment ? `<p class="match-comment" style="color: var(--accent-orange); margin-top: 10px; font-style: italic;">"${match.comment}"</p>` : ''}
+            ${match.nextMatch ? `<p class="next-match-info" style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border-color); font-size: 0.9rem;"><strong>Prochain match:</strong><br>${match.nextMatch}</p>` : ''}
         </div>
     `;
     return scoreCard;
@@ -855,7 +857,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.11.23";
+        const version = "2026.01.27.11.36";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
@@ -891,6 +893,8 @@ function loadExternalData() {
                     currentScores[existingScoreIndex].score1 = parseInt(match[2]);
                     currentScores[existingScoreIndex].score2 = parseInt(match[3]);
                     currentScores[existingScoreIndex].team2 = match[4].replace(/\s*-\s*\d+$/, '');  // Nettoyer le " - 1", " - 2", etc.
+                    currentScores[existingScoreIndex].nextMatch = data.prochain_match;
+                    currentScores[existingScoreIndex].comment = data.commentaire;
                 } else {
                     // Create new if not found
                     const newScore = {

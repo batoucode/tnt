@@ -8,67 +8,7 @@ const matchScores = [
 
 // ... (existing code) ...
 
-// Charger les données externes (U13M1)
-function loadExternalData() {
-    // Utiliser un chemin relatif correct
-    const jsonPath = 'resultat_et_match_a_venir/U13M1/dernier_match.json';
 
-    fetch(jsonPath + '?t=' + new Date().getTime()) // Cache busting
-        .then(response => {
-            if (!response.ok) {
-                // Si échec (ex: local file system), on garde les données manuelles
-                throw new Error('Erreur chargement données U13M1 ou fichier local');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Données U13M1 chargées:", data);
-
-            // 1. Mise à jour du score
-            // Format attendu: "TNT 55 - 29 Basket Club Azay Cheille - 1"
-            const scoreRegex = /^(.*?) (\d+) - (\d+) (.*)$/;
-            const match = data.dernier_match.match(scoreRegex);
-
-            if (match) {
-                // Chercher l'entrée existante pour U13 M1
-                const existingScoreIndex = currentScores.findIndex(s => s.team1.includes("U13 M1") || s.id === 1);
-
-                if (existingScoreIndex !== -1) {
-                    // Update existing
-                    currentScores[existingScoreIndex].score1 = parseInt(match[2]);
-                    currentScores[existingScoreIndex].score2 = parseInt(match[3]);
-                    currentScores[existingScoreIndex].team2 = match[4];
-                    // On garde la date existante ou on met "Récemment"
-                } else {
-                    // Create new if not found
-                    const newScore = {
-                        id: 999,
-                        team1: "TNT U13 M1",
-                        team2: match[4],
-                        score1: parseInt(match[2]),
-                        score2: parseInt(match[3]),
-                        date: "Récemment",
-                        competition: "Championnat"
-                    };
-                    currentScores.unshift(newScore);
-                }
-
-                // Mettre à jour l'affichage des scores
-                renderScores();
-            }
-
-            // 2. Mise à jour du prochain match pour l'équipe U13 M1
-            const u13m1Team = teams.find(t => t.name === "U13 M1");
-            if (u13m1Team) {
-                u13m1Team.nextMatch = data.prochain_match;
-                // Mettre à jour l'affichage des équipes
-                renderTeams();
-            }
-        })
-        .catch(error => {
-            console.warn('Utilisation des données manuelles (fetch échoué):', error);
-        });
-}
 
 // Données pour les équipes
 const teams = [
@@ -905,17 +845,21 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.10.16";
+        const version = "2026.01.27.10.41";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
 
 // Charger les données externes (U13M1)
 function loadExternalData() {
-    fetch('resultat_et_match_a_venir/U13M1/dernier_match.json?t=' + new Date().getTime()) // Cache busting
+    // Utiliser un chemin relatif correct
+    const jsonPath = 'resultat_et_match_a_venir/U13M1/dernier_match.json';
+
+    fetch(jsonPath + '?t=' + new Date().getTime()) // Cache busting
         .then(response => {
             if (!response.ok) {
-                throw new Error('Erreur chargement données U13M1');
+                // Si échec (ex: local file system), on garde les données manuelles
+                throw new Error('Erreur chargement données U13M1 ou fichier local');
             }
             return response.json();
         })
@@ -924,23 +868,32 @@ function loadExternalData() {
 
             // 1. Mise à jour du score
             // Format attendu: "TNT 55 - 29 Basket Club Azay Cheille - 1"
-            // Regex pour extraire: Team1 Score1 - Score2 Team2
             const scoreRegex = /^(.*?) (\d+) - (\d+) (.*)$/;
             const match = data.dernier_match.match(scoreRegex);
 
             if (match) {
-                const newScore = {
-                    id: 999, // ID temporaire
-                    team1: "TNT U13 M1", // Force TNT name for consistency or use match[1]
-                    team2: match[4],
-                    score1: parseInt(match[2]),
-                    score2: parseInt(match[3]),
-                    date: "Récemment", // Date non fournie dans le JSON
-                    competition: "Championnat" // Compétition non fournie
-                };
+                // Chercher l'entrée existante pour U13 M1
+                // On cherche par ID=1 (l'entrée manuelle) ou par nom
+                const existingScoreIndex = currentScores.findIndex(s => s.id === 1 || s.team1.includes("U13 M1"));
 
-                // Ajouter au début du tableau des scores
-                currentScores.unshift(newScore);
+                if (existingScoreIndex !== -1) {
+                    // Update existing
+                    currentScores[existingScoreIndex].score1 = parseInt(match[2]);
+                    currentScores[existingScoreIndex].score2 = parseInt(match[3]);
+                    currentScores[existingScoreIndex].team2 = match[4];
+                } else {
+                    // Create new if not found
+                    const newScore = {
+                        id: 999,
+                        team1: "TNT U13 M1",
+                        team2: match[4],
+                        score1: parseInt(match[2]),
+                        score2: parseInt(match[3]),
+                        date: "Récemment",
+                        competition: "Championnat"
+                    };
+                    currentScores.unshift(newScore);
+                }
 
                 // Mettre à jour l'affichage des scores
                 renderScores();
@@ -955,7 +908,7 @@ function loadExternalData() {
             }
         })
         .catch(error => {
-            console.error('Erreur:', error);
+            console.warn('Utilisation des données manuelles (fetch échoué):', error);
         });
 }
 

@@ -886,7 +886,7 @@ function loadExternalData() {
                     const newScore = {
                         id: 999,
                         team1: "TNT U13 M1",
-                        team2: match[4],
+                        team2: match[4].replace(/\s*-\s*\d+$/, ''),  // Nettoyer le " - 1", " - 2", etc.
                         score1: parseInt(match[2]),
                         score2: parseInt(match[3]),
                         date: "Récemment",

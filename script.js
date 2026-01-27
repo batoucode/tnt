@@ -834,7 +834,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.14.50";
+        const version = "2026.01.27.15.05";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
@@ -856,14 +856,15 @@ function loadExternalData() {
             console.log("Données U13M1 chargées:", data);
 
             // 1. Mise à jour du score
-            // Format attendu: "TNT 55 - 29 Basket Club Azay Cheille - 1"
-            const scoreRegex = /^(.*?) (\d+) - (\d+) (.*)$/;
+            // Format flexible: "EQUIPE SCORE - SCORE EQUIPE" ou "EQUIPE SCORE-SCORE EQUIPE"
+            const scoreRegex = /^(.*?)\s+(\d+)\s*[-]\s*(\d+)\s+(.*)$/;
             const match = data.dernier_match.match(scoreRegex);
+
+            console.log("Extraction match regex:", match);
 
             if (match) {
                 // Chercher l'entrée existante pour U13 M1
-                // On cherche par ID=1 (l'entrée manuelle) ou par nom
-                const existingScoreIndex = currentScores.findIndex(s => s.id === 1 || s.team1.includes("U13 M1"));
+                const existingScoreIndex = currentScores.findIndex(s => s.team1.includes("U13 M1") || s.id === 1);
 
                 if (existingScoreIndex !== -1) {
                     // Update existing
@@ -899,7 +900,8 @@ function loadExternalData() {
             }
         })
         .catch(error => {
-            console.warn('Utilisation des données manuelles (fetch échoué ou bloqué par le navigateur):', error);
+            console.error('Erreur loadExternalData:', error);
+            console.warn('Utilisation des données manuelles (Fichier JSON inaccessible ou bloqué par CORS)');
         });
 }
 

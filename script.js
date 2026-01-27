@@ -1,6 +1,5 @@
-﻿// Données pour les scores
-const matchScores = [
-    { id: 1, team1: "TNT U13 M1", team2: "AZAY CHEILLE", score1: 55, score2: 29, date: "24/01/2026", competition: "Championnat Départemental" },
+﻿const matchScores = [
+    // { id: 1, team1: "TNT U13 M1", team2: "AZAY CHEILLE", score1: 55, score2: 29, date: "24/01/2026", competition: "Championnat Départemental" }, // Remplacé par le chargement dynamique
     { id: 2, team1: "TNT U13 F", team2: "ESO", score1: 35, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 3, team1: "TNT U13 M2", team2: "Montlouis", score1: 24, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 4, team1: "TNT U15 F1", team2: "BOURGUEIL", score1: 47, score2: 40, date: "24/01/2026", competition: "Championnat Départemental" }
@@ -223,6 +222,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Chargement des équipes
     renderTeams();
+
+    // Chargement des données externes (U13M1)
+    loadExternalData();
 
     // Animation au scroll
     initScrollAnimations();
@@ -838,9 +840,58 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.26.08.45";
+        const version = "2026.01.27.09.55";
         versionDisplay.textContent = `Version: ${version}`;
     }
+}
+
+// Charger les données externes (U13M1)
+function loadExternalData() {
+    fetch('resultat_et_match_a_venir/U13M1/dernier_match.json?t=' + new Date().getTime()) // Cache busting
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur chargement données U13M1');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Données U13M1 chargées:", data);
+
+            // 1. Mise à jour du score
+            // Format attendu: "TNT 55 - 29 Basket Club Azay Cheille - 1"
+            // Regex pour extraire: Team1 Score1 - Score2 Team2
+            const scoreRegex = /^(.*?) (\d+) - (\d+) (.*)$/;
+            const match = data.dernier_match.match(scoreRegex);
+
+            if (match) {
+                const newScore = {
+                    id: 999, // ID temporaire
+                    team1: "TNT U13 M1", // Force TNT name for consistency or use match[1]
+                    team2: match[4],
+                    score1: parseInt(match[2]),
+                    score2: parseInt(match[3]),
+                    date: "Récemment", // Date non fournie dans le JSON
+                    competition: "Championnat" // Compétition non fournie
+                };
+
+                // Ajouter au début du tableau des scores
+                currentScores.unshift(newScore);
+
+                // Mettre à jour l'affichage des scores
+                renderScores();
+            }
+
+            // 2. Mise à jour du prochain match pour l'équipe U13 M1
+            const u13m1Team = teams.find(t => t.name === "U13 M1");
+            if (u13m1Team) {
+                u13m1Team.nextMatch = data.prochain_match;
+                // Mettre à jour l'affichage des équipes
+                renderTeams();
+            }
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+        });
 }
 
 // ==================== SEARCH FUNCTIONALITY ====================

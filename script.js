@@ -427,28 +427,11 @@ function renderScores() {
         // Créer le conteneur du carrousel
         const carouselWrapper = document.createElement('div');
         carouselWrapper.className = 'carousel-wrapper';
-        carouselWrapper.style.display = 'flex';
-        carouselWrapper.style.alignItems = 'center';
-        carouselWrapper.style.justifyContent = 'center';
-        carouselWrapper.style.gap = '20px';
-        carouselWrapper.style.position = 'relative';
-        carouselWrapper.style.width = '100%';
 
         // Bouton Précédent
         const prevBtn = document.createElement('button');
+        prevBtn.className = 'carousel-btn';
         prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i>';
-        prevBtn.style.background = 'rgba(255, 107, 0, 0.1)';
-        prevBtn.style.border = '2px solid var(--accent-orange)';
-        prevBtn.style.color = 'var(--accent-orange)';
-        prevBtn.style.borderRadius = '50%';
-        prevBtn.style.width = '40px';
-        prevBtn.style.height = '40px';
-        prevBtn.style.cursor = 'pointer';
-        prevBtn.style.display = 'flex';
-        prevBtn.style.alignItems = 'center';
-        prevBtn.style.justifyContent = 'center';
-        prevBtn.style.flexShrink = '0'; // Fix: Empêcher le bouton de rétrécir
-        prevBtn.style.zIndex = '10';
         prevBtn.onclick = () => {
             currentScoreIndex--;
             if (currentScoreIndex < 0) {
@@ -460,19 +443,8 @@ function renderScores() {
 
         // Bouton Suivant
         const nextBtn = document.createElement('button');
+        nextBtn.className = 'carousel-btn';
         nextBtn.innerHTML = '<i class="fas fa-chevron-right"></i>';
-        nextBtn.style.background = 'rgba(255, 107, 0, 0.1)';
-        nextBtn.style.border = '2px solid var(--accent-orange)';
-        nextBtn.style.color = 'var(--accent-orange)';
-        nextBtn.style.borderRadius = '50%';
-        nextBtn.style.width = '40px';
-        nextBtn.style.height = '40px';
-        nextBtn.style.cursor = 'pointer';
-        nextBtn.style.display = 'flex';
-        nextBtn.style.alignItems = 'center';
-        nextBtn.style.justifyContent = 'center';
-        nextBtn.style.flexShrink = '0'; // Fix: Empêcher le bouton de rétrécir
-        nextBtn.style.zIndex = '10';
         nextBtn.onclick = () => {
             currentScoreIndex++;
             if (currentScoreIndex > currentScores.length - itemsToShow) {
@@ -483,11 +455,8 @@ function renderScores() {
 
         // Conteneur des cartes (grille responsive)
         const cardsGrid = document.createElement('div');
-        cardsGrid.style.display = 'grid';
+        cardsGrid.className = 'carousel-cards-grid';
         cardsGrid.style.gridTemplateColumns = isMobile ? '1fr' : '1fr 1fr';
-        cardsGrid.style.gap = '20px';
-        cardsGrid.style.flex = '1'; // Fix: La grille prend l'espace restant
-        cardsGrid.style.width = 'auto'; // Fix: Pas de largeur fixe qui force le débordement
 
         // Sélectionner les scores à afficher
         if (currentScoreIndex > currentScores.length - itemsToShow && currentScores.length >= itemsToShow) {
@@ -857,7 +826,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.11.48";
+        const version = "2026.01.27.11.56";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

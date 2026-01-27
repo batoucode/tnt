@@ -27,8 +27,9 @@
     --text-tertiary: #808080;
 
     /* Card & Surface */
-    --card-bg: rgba(30, 30, 30, 0.8);
-    --card-bg-hover: rgba(40, 40, 40, 0.9);
+    --card-bg: rgba(30, 30, 30, 0.98);
+    /* Augmenté de 0.8 à 0.98 pour rendre les cartes opaques */
+    --card-bg-hover: rgba(40, 40, 40, 0.98);
     --glass-bg: rgba(20, 20, 20, 0.7);
 
     /* Borders */
@@ -2338,8 +2339,6 @@ input:checked+.slider::before {
     .search-result-title {
         font-size: 1.1rem;
     }
-}
-
 }
 
 /* Styles pour les catégories de la galerie */

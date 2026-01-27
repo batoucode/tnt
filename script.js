@@ -516,15 +516,17 @@ function createScoreCard(match) {
             <h3 style="color: var(--accent-orange); font-size: 1.5rem; text-transform: uppercase;">MATCH ${match.team1}</h3>
         </div>
         <div class="teams">
-            <div class="team">
-                <div class="team-logo" style="background: transparent; border: none; box-shadow: none; width: 80px; height: 80px;">
-                    <img src="img/logo TNT sans fond.png" alt="TNT" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.5));">
+            <div class="team team-1">
+                <div class="team-logo logo-tnt">
+                    <img src="img/logo TNT sans fond.png" alt="TNT">
                 </div>
                 <div class="team-name">${match.team1}</div>
             </div>
             <div class="vs">VS</div>
-            <div class="team">
-                <div class="team-logo">${match.team2.substring(0, 3).toUpperCase()}</div>
+            <div class="team team-2">
+                <div class="team-logo">
+                    ${match.team2.substring(0, 3).toUpperCase()}
+                </div>
                 <div class="team-name">${match.team2}</div>
             </div>
         </div>
@@ -826,7 +828,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.11.56";
+        const version = "2026.01.27.12.12";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

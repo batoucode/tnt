@@ -950,6 +950,19 @@ body.light-theme .hero p {
     box-shadow: var(--shadow-orange);
 }
 
+.logo-tnt {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.logo-tnt img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.5));
+}
+
 .team-name {
     font-weight: 600;
     font-size: 1rem;
@@ -961,10 +974,15 @@ body.light-theme .hero p {
     color: var(--accent-orange);
     font-size: 1.5rem;
     background: rgba(255, 107, 0, 0.15);
-    padding: 10px 20px;
-    border-radius: 50px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
     border: 2px solid var(--accent-orange);
     box-shadow: var(--glow-orange);
+    flex-shrink: 0;
 }
 
 .score {
@@ -1860,22 +1878,17 @@ input:checked+.slider::before {
         margin-bottom: 15px;
     }
 
-    .score span {
-        min-width: 50px;
-    }
-
     .vs {
-        font-size: 1rem;
-        padding: 4px 10px;
-        width: 35px;
-        height: 35px;
+        width: 42px !important;
+        height: 42px !important;
+        font-size: 1rem !important;
+        padding: 0 !important;
     }
 
     .team-logo {
-        width: 40px;
-        height: 40px;
-        font-size: 12px;
-        border-width: 2px;
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 14px !important;
     }
 
     .team-logo img {

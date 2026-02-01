@@ -1,6 +1,6 @@
 ﻿// Données pour les scores
+// NOTE: U13M1 est chargé dynamiquement depuis le JSON GitHub (voir loadExternalData)
 const matchScores = [
-    { id: 1, team1: "TNT U13 M1", team2: "AZAY CHEILLE", score1: 55, score2: 29, date: "24/01/2026", competition: "Championnat Départemental", nextMatch: "31 janv. à 17h00", comment: "Superbe victoire à domicile !" },
     { id: 2, team1: "TNT U13 F", team2: "ESO", score1: 35, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 3, team1: "TNT U13 M2", team2: "Montlouis", score1: 24, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 4, team1: "TNT U15 F1", team2: "BOURGUEIL", score1: 47, score2: 40, date: "24/01/2026", competition: "Championnat Départemental" }
@@ -834,12 +834,12 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.01.07.12";
+        const version = "2026.02.01.07.22";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
 
-// Charger les données externes (U13M1)
+// Charger les données externes (U13M1) - UNIQUEMENT depuis le JSON GitHub
 function loadExternalData() {
     // Utiliser le chemin GitHub raw pour accéder au JSON
     const jsonPath = 'https://raw.githubusercontent.com/batoucode/tnt/master/resultat_et_match_a_venir/U13M1/dernier_match.json';
@@ -847,61 +847,64 @@ function loadExternalData() {
     fetch(jsonPath + '?t=' + new Date().getTime()) // Cache busting
         .then(response => {
             if (!response.ok) {
-                // Si échec (ex: local file system), on garde les données manuelles
-                throw new Error('Erreur chargement données U13M1 ou fichier local');
+                throw new Error('Erreur chargement données U13M1');
             }
             return response.json();
         })
         .then(data => {
-            console.log("Données U13M1 chargées:", data);
+            console.log("✅ Données U13M1 chargées depuis JSON:", data);
 
-            // 1. Mise à jour du score
-            // Format flexible: "EQUIPE SCORE - SCORE EQUIPE" ou "EQUIPE SCORE-SCORE EQUIPE"
+            // Parser le score depuis le format "TNT 55 - 29 Azay Cheille"
             const scoreRegex = /^(.*?)\s+(\d+)\s*[-]\s*(\d+)\s+(.*)$/;
             const match = data.dernier_match.match(scoreRegex);
 
-            console.log("Extraction match regex:", match);
-
             if (match) {
-                // Chercher l'entrée existante pour U13 M1
-                const existingScoreIndex = currentScores.findIndex(s => s.team1.includes("U13 M1") || s.id === 1);
+                // Extraire les données
+                const team1 = match[1].trim(); // "TNT"
+                const score1 = parseInt(match[2]); // 55
+                const score2 = parseInt(match[3]); // 29
+                const team2 = match[4].trim(); // "Azay Cheille"
 
-                if (existingScoreIndex !== -1) {
-                    // Update existing
-                    currentScores[existingScoreIndex].score1 = parseInt(match[2]);
-                    currentScores[existingScoreIndex].score2 = parseInt(match[3]);
-                    currentScores[existingScoreIndex].team2 = match[4].replace(/\s*-\s*\d+$/, '');  // Nettoyer le " - 1", " - 2", etc.
-                    currentScores[existingScoreIndex].nextMatch = data.prochain_match;
-                    currentScores[existingScoreIndex].comment = data.commentaire;
+                // Créer l'objet score U13M1
+                const u13m1Score = {
+                    id: 1,
+                    team1: "TNT U13 M1",
+                    team2: team2.toUpperCase(),
+                    score1: score1,
+                    score2: score2,
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    competition: "Championnat Départemental",
+                    nextMatch: data.prochain_match,
+                    comment: data.commentaire
+                };
+
+                // Vérifier si U13M1 existe déjà dans currentScores
+                const existingIndex = currentScores.findIndex(s => s.team1.includes("U13 M1"));
+
+                if (existingIndex !== -1) {
+                    // Remplacer l'existant
+                    currentScores[existingIndex] = u13m1Score;
+                    console.log("🔄 Score U13M1 mis à jour");
                 } else {
-                    // Create new if not found
-                    const newScore = {
-                        id: 999,
-                        team1: "TNT U13 M1",
-                        team2: match[4].replace(/\s*-\s*\d+$/, ''),  // Nettoyer le " - 1", " - 2", etc.
-                        score1: parseInt(match[2]),
-                        score2: parseInt(match[3]),
-                        date: "Récemment",
-                        competition: "Championnat"
-                    };
-                    currentScores.unshift(newScore);
+                    // Ajouter en première position
+                    currentScores.unshift(u13m1Score);
+                    console.log("➕ Score U13M1 ajouté");
                 }
 
-                // Mettre à jour l'affichage des scores
+                // Mettre à jour l'affichage
                 renderScores();
             }
 
-            // 2. Mise à jour du prochain match pour l'équipe U13 M1
+            // Mettre à jour le prochain match dans l'équipe U13 M1
             const u13m1Team = teams.find(t => t.name === "U13 M1");
             if (u13m1Team) {
                 u13m1Team.nextMatch = data.prochain_match;
-                // Mettre à jour l'affichage des équipes
                 renderTeams();
             }
         })
         .catch(error => {
-            console.error('Erreur loadExternalData:', error);
-            console.warn('Utilisation des données manuelles (Fichier JSON inaccessible ou bloqué par CORS)');
+            console.error('❌ Erreur chargement JSON U13M1:', error);
+            console.warn('⚠️ Les données U13M1 ne seront pas affichées (JSON inaccessible)');
         });
 }
 

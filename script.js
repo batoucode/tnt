@@ -548,6 +548,7 @@ function createScoreCard(match) {
             <p><strong>Compétition:</strong> ${match.competition}</p>
             <p><strong>Date:</strong> ${match.date}</p>
             ${match.nextMatch ? `<p class="next-match-info"><strong>Prochain match:</strong><br>${match.nextMatch}</p>` : ''}
+            ${match.maj ? `<p style="font-size: 0.75rem; font-style: italic; color: var(--accent-orange); margin-top: 10px; text-align: center;">Mis à jour le ${match.maj}</p>` : ''}
         </div>
     `;
     return scoreCard;
@@ -836,7 +837,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.01.07.39";
+        const version = "2026.02.01.07.53";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
@@ -877,7 +878,8 @@ function loadExternalData() {
                     date: new Date().toLocaleDateString('fr-FR'),
                     competition: "Championnat Départemental",
                     nextMatch: data.prochain_match,
-                    comment: data.commentaire
+                    comment: data.commentaire,
+                    maj: data.maj // Date de mise à jour du JSON
                 };
 
                 // Vérifier si U13M1 existe déjà dans currentScores

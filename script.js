@@ -1,6 +1,6 @@
 ﻿// Données pour les scores
 const matchScores = [
-    { id: 1, team1: "TNT U13 M1", team2: "AZAY CHEILLE", score1: 55, score2: 29, date: "24/01/2026", competition: "Championnat Départemental" },
+    { id: 1, team1: "TNT U13 M1", team2: "AZAY CHEILLE", score1: 55, score2: 29, date: "24/01/2026", competition: "Championnat Départemental", nextMatch: "31 janv. à 17h00", comment: "Superbe victoire à domicile !" },
     { id: 2, team1: "TNT U13 F", team2: "ESO", score1: 35, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 3, team1: "TNT U13 M2", team2: "Montlouis", score1: 24, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 4, team1: "TNT U15 F1", team2: "BOURGUEIL", score1: 47, score2: 40, date: "24/01/2026", competition: "Championnat Départemental" }
@@ -50,7 +50,7 @@ const teams = [
         category: "U13 MASCULIN 1",
         coach: "Clément CIAVALDINI-MARET, Nelson HUGUET",
         training: "Lun 18h15-19h30 (Monnaie), Mer 15h30-16h45 (Château-Renault)",
-        nextMatch: "À venir",
+        nextMatch: "31 janv. à 17h00",
         photo: "photos/photo%20d'equipes/U13M1/2026-01-24%20183702.png",
         players: [
             { name: "Cameron LECOUFFE", number: "", position: "" },
@@ -834,7 +834,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.01.27.15.26";
+        const version = "2026.02.01.07.12";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

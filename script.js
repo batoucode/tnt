@@ -2,7 +2,6 @@
 // NOTE: U13M1 ci-dessous est un FALLBACK. Les vraies données viennent du JSON GitHub.
 // Le JSON écrasera ces valeurs automatiquement si accessible (voir loadExternalData)
 const matchScores = [
-    { id: 1, team1: "TNT U13 M1", team2: "AZAY CHEILLE", score1: 55, score2: 29, date: "24/01/2026", competition: "Championnat Départemental", nextMatch: "31 janv. à 17h00", comment: "Superbe victoire à domicile !" },
     { id: 2, team1: "TNT U13 F", team2: "ESO", score1: 35, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 3, team1: "TNT U13 M2", team2: "Montlouis", score1: 24, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 4, team1: "TNT U15 F1", team2: "BOURGUEIL", score1: 47, score2: 40, date: "24/01/2026", competition: "Championnat Départemental" }
@@ -846,7 +845,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.02.08.40";
+        const version = "2026.02.02.08.45";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }

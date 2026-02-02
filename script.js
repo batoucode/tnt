@@ -846,12 +846,11 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.02.08.15";
+        const version = "2026.02.02.08.20";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
 
-// Charger les données externes (U13M1) - UNIQUEMENT depuis le JSON GitHub
 // Charger les données externes (U13M1) - UNIQUEMENT depuis le JSON GitHub
 function loadExternalData() {
     // Utiliser l'API GitHub pour éviter le cache du CDN (Raw)

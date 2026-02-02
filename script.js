@@ -837,7 +837,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.01.07.53";
+        const version = "2026.02.02.07.10";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
@@ -846,69 +846,88 @@ function displayVersion() {
 function loadExternalData() {
     // Utiliser le chemin GitHub raw pour accéder au JSON
     const jsonPath = 'https://raw.githubusercontent.com/batoucode/tnt/master/resultat_et_match_a_venir/U13M1/dernier_match.json';
+    const timestamp = new Date().getTime();
 
-    fetch(jsonPath + '?t=' + new Date().getTime()) // Cache busting
+    console.log("🚀 Démarrage du chargement U13M1...");
+
+    fetch(jsonPath + '?t=' + timestamp) // Cache busting
         .then(response => {
+            console.log("📡 Réponse reçue:", response.status);
             if (!response.ok) {
-                throw new Error('Erreur chargement données U13M1');
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
-            console.log("✅ Données U13M1 chargées depuis JSON:", data);
+            console.log("✅ Données JSON brutes reçues:", data);
 
-            // Parser le score depuis le format "TNT 55 - 29 Azay Cheille"
+            if (!data.dernier_match) {
+                console.error("❌ Champ 'dernier_match' manquant dans le JSON");
+                return;
+            }
+
+            // Parser le score "TNT 30 - 40 La Ville aux Dames"
+            // Regex flexible : gère "TNT" au début, les espaces, le tiret, et le reste
             const scoreRegex = /^(.*?)\s+(\d+)\s*[-]\s*(\d+)\s+(.*)$/;
             const match = data.dernier_match.match(scoreRegex);
 
             if (match) {
+                console.log("🔍 Regex match:", match);
                 // Extraire les données
                 const team1 = match[1].trim(); // "TNT"
-                const score1 = parseInt(match[2]); // 55
-                const score2 = parseInt(match[3]); // 29
-                const team2 = match[4].trim(); // "Azay Cheille"
+                const score1 = parseInt(match[2]);
+                const score2 = parseInt(match[3]);
+                const team2 = match[4].trim();
 
                 // Créer l'objet score U13M1
                 const u13m1Score = {
-                    id: 1,
-                    team1: "TNT U13 M1",
+                    id: 1, // ID fixe pour remplacer le mock
+                    team1: "TNT U13 M1", // On force le nom standard TNT U13 M1
                     team2: team2.toUpperCase(),
                     score1: score1,
                     score2: score2,
-                    date: new Date().toLocaleDateString('fr-FR'),
+                    date: data.maj || new Date().toLocaleDateString('fr-FR'), // Utilise date MAJ si dispo
                     competition: "Championnat Départemental",
-                    nextMatch: data.prochain_match,
-                    comment: data.commentaire,
-                    maj: data.maj // Date de mise à jour du JSON
+                    nextMatch: data.prochain_match || "À venir",
+                    comment: data.commentaire || "",
+                    maj: data.maj
                 };
 
+                console.log("📝 Objet score créé:", u13m1Score);
+
                 // Vérifier si U13M1 existe déjà dans currentScores
-                const existingIndex = currentScores.findIndex(s => s.team1.includes("U13 M1"));
+                // On cherche par ID 1 ou par nom d'équipe approximatif
+                const existingIndex = currentScores.findIndex(s => s.id === 1 || s.team1.includes("U13 M1"));
 
                 if (existingIndex !== -1) {
                     // Remplacer l'existant
                     currentScores[existingIndex] = u13m1Score;
-                    console.log("🔄 Score U13M1 mis à jour");
+                    console.log("🔄 Score U13M1 mis à jour à l'index", existingIndex);
                 } else {
                     // Ajouter en première position
                     currentScores.unshift(u13m1Score);
-                    console.log("➕ Score U13M1 ajouté");
+                    console.log("➕ Score U13M1 ajouté au début");
                 }
 
-                // Mettre à jour l'affichage
+                // Mettre à jour l'affichage des scores
                 renderScores();
-            }
 
-            // Mettre à jour le prochain match dans l'équipe U13 M1
-            const u13m1Team = teams.find(t => t.name === "U13 M1");
-            if (u13m1Team) {
-                u13m1Team.nextMatch = data.prochain_match;
-                renderTeams();
+                // Mettre à jour le prochain match dans la section Équipes aussi
+                const u13m1Team = teams.find(t => t.name === "U13 M1");
+                if (u13m1Team) {
+                    u13m1Team.nextMatch = data.prochain_match;
+                    console.log("updating team next match info");
+                    renderTeams(); // Re-render teams section
+                }
+
+            } else {
+                console.warn("⚠️ Le format du match n'est pas reconnu par la regex:", data.dernier_match);
+                showNotification("Format de score U13M1 non reconnu");
             }
         })
         .catch(error => {
-            console.error('❌ Erreur chargement JSON U13M1:', error);
-            console.warn('⚠️ Les données U13M1 ne seront pas affichées (JSON inaccessible)');
+            console.error('❌ Erreur CRITIQUE chargement JSON U13M1:', error);
+            // Optionnel : afficher une notif d'erreur à l'utilisateur
         });
 }
 

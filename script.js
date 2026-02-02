@@ -837,7 +837,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.02.07.30";
+        const version = "2026.02.02.07.35";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
@@ -862,7 +862,15 @@ function loadExternalData() {
             console.log("📄 Données brutes (Text):", textData.substring(0, 500)); // Affiche le début
 
             try {
-                const data = JSON.parse(textData);
+                // Nettoyage : Le fichier GitHub contient parfois des balises Markdown
+                let jsonString = textData;
+                const firstBrace = textData.indexOf('{');
+                const lastBrace = textData.lastIndexOf('}');
+                if (firstBrace !== -1 && lastBrace !== -1) {
+                    jsonString = textData.substring(firstBrace, lastBrace + 1);
+                    console.log("🧹 JSON nettoyé");
+                }
+                const data = JSON.parse(jsonString);
                 console.log("✅ JSON parsé avec succès:", data);
 
                 if (!data.dernier_match) {

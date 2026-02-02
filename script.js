@@ -846,37 +846,47 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.02.07.50";
+        const version = "2026.02.02.08.15";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
 
 // Charger les données externes (U13M1) - UNIQUEMENT depuis le JSON GitHub
+// Charger les données externes (U13M1) - UNIQUEMENT depuis le JSON GitHub
 function loadExternalData() {
-    // Utiliser le chemin GitHub raw pour accéder au JSON
-    const jsonPath = 'https://raw.githubusercontent.com/batoucode/tnt/master/resultat_et_match_a_venir/U13M1/dernier_match.json';
+    // Utiliser l'API GitHub pour éviter le cache du CDN (Raw)
+    const apiUrl = 'https://api.github.com/repos/batoucode/tnt/contents/resultat_et_match_a_venir/U13M1/dernier_match.json';
     const timestamp = new Date().getTime();
 
-    console.log("🚀 Démarrage du chargement U13M1...");
+    console.log("🚀 Démarrage du chargement U13M1 via API...");
 
-    fetch(jsonPath + '?t=' + timestamp) // Cache busting
+    fetch(apiUrl + '?t=' + timestamp)
         .then(response => {
             console.log("📡 Réponse reçue:", response.status);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return response.text(); // On lit en texte d'abord pour debug
+            return response.json();
         })
-        .then(textData => {
-            console.log("📄 Données brutes (Text):", textData.substring(0, 500)); // Affiche le début
+        .then(apiData => {
+            // L'API renvoie le contenu en Base64 dans le champ 'content'
+            if (!apiData.content) {
+                throw new Error("Contenu manquant dans la réponse API");
+            }
+
+            // Décodage Base64 + UTF-8 (pour les accents)
+            const rawContent = apiData.content.replace(/\n/g, '');
+            const decodedText = decodeURIComponent(escape(window.atob(rawContent)));
+
+            console.log("📄 Données décodées:", decodedText.substring(0, 500));
 
             try {
                 // Nettoyage : Le fichier GitHub contient parfois des balises Markdown
-                let jsonString = textData;
-                const firstBrace = textData.indexOf('{');
-                const lastBrace = textData.lastIndexOf('}');
+                let jsonString = decodedText;
+                const firstBrace = decodedText.indexOf('{');
+                const lastBrace = decodedText.lastIndexOf('}');
                 if (firstBrace !== -1 && lastBrace !== -1) {
-                    jsonString = textData.substring(firstBrace, lastBrace + 1);
+                    jsonString = decodedText.substring(firstBrace, lastBrace + 1);
                     console.log("🧹 JSON nettoyé");
                 }
                 const data = JSON.parse(jsonString);

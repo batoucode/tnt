@@ -1044,8 +1044,8 @@ body.light-theme .hero p {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: 30px;
-    padding-top: 5px;
+    gap: 75px;
+    /* Augmenté pour aligner le séparateur avec les chiffres */
 }
 
 .team-score {

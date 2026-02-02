@@ -513,7 +513,16 @@ function createScoreCard(match) {
     // Déterminer le gagnant pour le style
     const winner = match.score1 > match.score2 ? 'team1' : 'team2';
 
+    // Bouton de synchro pour U13M1
+    const syncBtn = (match.id === 1 || match.team1.includes('U13 M1')) ?
+        `<button onclick="this.querySelector('i').classList.add('fa-spin'); loadExternalData();" title="Actualiser" style="position: absolute; top: 15px; left: 15px; background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.1rem; z-index: 10; padding: 5px;">
+            <i class="fas fa-sync-alt"></i>
+         </button>` : '';
+
+    scoreCard.style.position = 'relative'; // Pour le positionnement absolu du bouton
+
     scoreCard.innerHTML = `
+        ${syncBtn}
         <div class="match-title" style="text-align: center; margin-bottom: 20px;">
             <h3 style="color: var(--accent-orange); font-size: 1.5rem; text-transform: uppercase;">MATCH ${match.team1}</h3>
         </div>
@@ -837,7 +846,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.02.07.35";
+        const version = "2026.02.02.07.50";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
@@ -920,6 +929,8 @@ function loadExternalData() {
                         currentScores.unshift(u13m1Score);
                         console.log("➕ Score U13M1 ajouté au début");
                     }
+
+                    showNotification("Score U13M1 actualisé !");
 
                     // Mettre à jour l'affichage des scores
                     renderScores();

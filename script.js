@@ -846,7 +846,7 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.02.08.20";
+        const version = "2026.02.02.08.35";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
@@ -939,7 +939,7 @@ function loadExternalData() {
                         console.log("➕ Score U13M1 ajouté au début");
                     }
 
-                    showNotification("Score U13M1 actualisé !");
+                    showNotification("site actualisé !");
 
                     // Mettre à jour l'affichage des scores
                     renderScores();

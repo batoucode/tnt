@@ -2,6 +2,7 @@
 // NOTE: U13M1 ci-dessous est un FALLBACK. Les vraies données viennent du JSON GitHub.
 // Le JSON écrasera ces valeurs automatiquement si accessible (voir loadExternalData)
 const matchScores = [
+    { id: 1, team1: "TNT U13 M1", team2: "...", score1: 0, score2: 0, date: "Chargement...", competition: "Championnat Départemental" },
     { id: 2, team1: "TNT U13 F", team2: "ESO", score1: 35, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 3, team1: "TNT U13 M2", team2: "Montlouis", score1: 24, score2: 33, date: "24/01/2026", competition: "Championnat Départemental" },
     { id: 4, team1: "TNT U15 F1", team2: "BOURGUEIL", score1: 47, score2: 40, date: "24/01/2026", competition: "Championnat Départemental" }
@@ -845,46 +846,38 @@ function displayVersion() {
     const versionDisplay = document.getElementById('version-display');
     if (versionDisplay) {
         // Cette valeur sera mise à jour par l'agent avant chaque commit
-        const version = "2026.02.02.08.45";
+        const version = "2026.02.02.08.55";
         versionDisplay.textContent = `Version: ${version}`;
     }
 }
 
 // Charger les données externes (U13M1) - UNIQUEMENT depuis le JSON GitHub
 function loadExternalData() {
-    // Utiliser l'API GitHub pour éviter le cache du CDN (Raw)
-    const apiUrl = 'https://api.github.com/repos/batoucode/tnt/contents/resultat_et_match_a_venir/U13M1/dernier_match.json';
+    // Utiliser le chemin GitHub raw pour accéder au JSON
+    // Note: On évite l'API GitHub qui a des limites de taux (Error 403)
+    const jsonPath = 'https://raw.githubusercontent.com/batoucode/tnt/master/resultat_et_match_a_venir/U13M1/dernier_match.json';
     const timestamp = new Date().getTime();
 
-    console.log("🚀 Démarrage du chargement U13M1 via API...");
+    console.log("🚀 Démarrage du chargement U13M1...");
 
-    fetch(apiUrl + '?t=' + timestamp)
+    fetch(jsonPath + '?t=' + timestamp, { cache: 'no-cache' })
         .then(response => {
             console.log("📡 Réponse reçue:", response.status);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            return response.json();
+            return response.text();
         })
-        .then(apiData => {
-            // L'API renvoie le contenu en Base64 dans le champ 'content'
-            if (!apiData.content) {
-                throw new Error("Contenu manquant dans la réponse API");
-            }
-
-            // Décodage Base64 + UTF-8 (pour les accents)
-            const rawContent = apiData.content.replace(/\n/g, '');
-            const decodedText = decodeURIComponent(escape(window.atob(rawContent)));
-
-            console.log("📄 Données décodées:", decodedText.substring(0, 500));
+        .then(textData => {
+            console.log("📄 Données reçues:", textData.substring(0, 500));
 
             try {
                 // Nettoyage : Le fichier GitHub contient parfois des balises Markdown
-                let jsonString = decodedText;
-                const firstBrace = decodedText.indexOf('{');
-                const lastBrace = decodedText.lastIndexOf('}');
+                let jsonString = textData;
+                const firstBrace = textData.indexOf('{');
+                const lastBrace = textData.lastIndexOf('}');
                 if (firstBrace !== -1 && lastBrace !== -1) {
-                    jsonString = decodedText.substring(firstBrace, lastBrace + 1);
+                    jsonString = textData.substring(firstBrace, lastBrace + 1);
                     console.log("🧹 JSON nettoyé");
                 }
                 const data = JSON.parse(jsonString);

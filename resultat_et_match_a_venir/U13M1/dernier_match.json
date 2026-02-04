@@ -1,6 +1,9 @@
+```json
 {
   "equipe": "U13M1",
-  "dernier_match": "Ville aux Dames 40 - 30 TNT",
-  "prochain_match": "7 févr. à 15h00",
-  "commentaire": "Défaite serrée à l'extérieur face au leader."
+  "dernier_match": "ES La Ville aux Dames 40 - 30 TNT",
+  "prochain_match": "7 févr. à 15h00 contre CS Membrollais à l'extérieur",
+  "commentaire": "Défaite à l'extérieur chez le leader de la poule.",
+  "maj": "4 février 2026"
 }
+```

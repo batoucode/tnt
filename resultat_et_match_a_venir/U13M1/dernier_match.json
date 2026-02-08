@@ -1,9 +1,10 @@
-```json
 {
   "equipe": "U13M1",
-  "dernier_match": "Membrollais 47 - 45 TNT",
-  "prochain_match": "7 mars à 01h00 contre US Saint Pierre des Corps 2 à domicile",
-  "commentaire": "Une défaite très serrée de deux points à l'extérieur",
-  "maj": "8 février 2026"
+  "titre du dernier_match": "TNT 45 - 47 Membrollais",
+  "resultat TNT": "45",
+  "resultat equipe adverse": "47",
+  "dates et heure du prochain match": "7 mars 2026 à 01h00",
+  "lieux de la prochaine rencontre": "à domicile",
+  "commentaire": "Défaite serrée à l'extérieur",
+  "maj": "8 février 2026 à 00h48"
 }
-```

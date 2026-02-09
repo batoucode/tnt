@@ -1,9 +1,12 @@
 ```json
 {
   "equipe": "U13M1",
-  "dernier_match": "Membrollais 47 - 45 TNT",
-  "prochain_match": "7 mars à 01h00 contre US Saint Pierre des Corps - 2 à domicile",
-  "commentaire": "Défaite très serrée de deux points à l'extérieur contre le CS Membrollais.",
-  "maj": "9 février 2026"
+  "titre du dernier_match": "TNT 55 - 29 Basket Club Azay Cheille - 1",
+  "resultat TNT": "55",
+  "resultat equipe adverse": "29",
+  "dates et heure du prochain match": "7 févr 2026 à 15h00",
+  "lieux de la prochaine rencontre": "à l'extérieur",
+  "commentaire": "Superbe victoire à domicile",
+  "maj": "February 9th 2026, 6:12:10 am"
 }
 ```

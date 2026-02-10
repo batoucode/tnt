@@ -1,12 +1,11 @@
 ```json
 {
-  "equipe": "EN - CTC Team Nord Touraine U13-1",
-  "titre du dernier_match": "CTC Team Nord Touraine 47 - 45 Club Sportif Membrollais",
+  "equipe": "EN - CTC Team Nord Touraine",
+  "titre du dernier_match": "CTC Team Nord Touraine 47 - 45 CLUB SPORTIF MEMBROLLAIS",
   "resultat TNT": "47",
   "resultat equipe adverse": "45",
   "dates et heure du prochain match": "7 mars 2026 a 01h00",
   "lieux de la prochaine rencontre": "a domicile",
-  "commentaire": "Victoire serrée à l'extérieur",
-  "maj": "February 10th 2026, 1:12:51 am"
+  "commentaire": "Victoire serrée à l'extérieur"
 }
 ```

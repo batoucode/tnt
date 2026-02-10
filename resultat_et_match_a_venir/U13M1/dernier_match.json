@@ -2,10 +2,10 @@
 {
   "equipe": "U13M1",
   "titre du dernier_match": "TNT 47 - 45 Club Sportif Membrollais",
-  "resultat TNT: 47",
+  "resultat TNT": "47",
   "resultat equipe adverse: 45",
-  "dates et heure du prochain match : 7 mars 2026 a 01h00",
-  "lieux de la prochaine rencontre : a domicile",
+  "dates et heure du prochain match" : "7 mars 2026 a 01h00",
+  "lieux de la prochaine rencontre" : "a domicile",
   "commentaire": "Victoire serrée à l'extérieur",
   "maj":"February 10th 2026, 1:12:51 am"
 }

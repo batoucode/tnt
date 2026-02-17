@@ -1,7 +1,11 @@
+```json
 {
-  "equipe": "U13M1",
-  "dernier_match": "TNT 45 - 47 CS Membrollais",
-  "prochain_match": "7 mars à 14h30 contre US Saint Pierre des Corps 2 à domicile",
-  "commentaire": "Une défaite frustrante de seulement deux points à l'extérieur malgré un beau combat.",
-  "maj": "17 février 2026"
+  "equipe": "DMU13 CTC TN-CR",
+  "titre du dernier_match": "CTC TN-CR 47 - 45 Club Sportif Membrollais",
+  "resultat TNT": "47",
+  "resultat equipe adverse": "45",
+  "dates et heure du prochain match": "7 mars 2026 a 14h30",
+  "lieux de la prochaine rencontre": "a domicile",
+  "commentaire": "Victoire serrée à l'extérieur"
 }
+```

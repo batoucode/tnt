@@ -1,11 +1,11 @@
 ```json
 {
-  "equipe": "DMU13",
+  "equipe": "U13M1",
   "titre du dernier_match": "TNT 29 - 42 US SAINT PIERRE DES CORPS - 2",
   "resultat TNT": "29",
   "resultat equipe adverse": "42",
-  "dates et heure du prochain match": "21 mars 2026 a 14h45",
-  "lieux de la prochaine rencontre": "a domicile",
+  "dates et heure du prochain match": "21 mars 2026 à 14h45",
+  "lieux de la prochaine rencontre": "à domicile",
   "commentaire": "Défaite à domicile"
 }
 ```
